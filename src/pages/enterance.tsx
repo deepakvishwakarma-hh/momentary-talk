@@ -7,7 +7,9 @@ const Enterence = () => {
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;800&display=swap');
             </style>
-            <Flex pos={"absolute"}
+            <Flex
+                pos={"fixed"}
+                top="0"
                 height="100%"
                 width="100%"
                 alignItems="center"
@@ -27,7 +29,9 @@ const Enterence = () => {
                     </Box>
                     <Flex alignItems="center" flexDirection={"column"} p={1} >
                         <Image width={100} height={100} src="/secure.png" />
-
+                        {/* <Text p="1rem" color="black" textTransform={"uppercase"} fontSize="1rem" fontWeight="bold">
+                            Encrypte database
+                        </Text> */}
                     </Flex >
                     <Box
                     >

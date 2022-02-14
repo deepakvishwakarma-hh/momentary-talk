@@ -7,8 +7,9 @@ const Enterence = () => {
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;800&display=swap');
             </style>
-            <Flex
-                height="100vh"
+            <Flex pos={"absolute"}
+                height="100%"
+                width="100%"
                 alignItems="center"
                 justifyContent='center'>
                 <Grid
@@ -32,7 +33,7 @@ const Enterence = () => {
                     </Flex >
                     <Box
                     >
-                        <Grid my={2} padding=".5rem .5rem .5rem 0" borderRadius="1rem" bg='white' gridTemplateColumns='50px auto' templateRows='100%' alignItems={"center"}>
+                        <Grid bg="#F3F2FB" my={2} padding=".5rem .5rem .5rem 0" borderRadius={5} gridTemplateColumns='50px auto' templateRows='100%' alignItems={"center"}>
                             <Image width={25} height={25} src="/google.svg" />
                             <Text fontSize="1xl" fontWeight="500" >Sign With Google</Text>
                         </Grid>

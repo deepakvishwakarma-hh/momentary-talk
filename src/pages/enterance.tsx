@@ -27,9 +27,7 @@ const Enterence = () => {
                     </Box>
                     <Flex alignItems="center" flexDirection={"column"} p={1} >
                         <Image width={100} height={100} src="/secure.png" />
-                        <Text p="1rem" color="black" textTransform={"uppercase"} fontSize="1rem" fontWeight="bold">
-                            Encrypte database
-                        </Text>
+
                     </Flex >
                     <Box
                     >

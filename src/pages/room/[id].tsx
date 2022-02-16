@@ -6,7 +6,7 @@ import Footer from "../../../component/chat-component/footer";
 import Header from "../../../component/chat-component/header";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { addMyMessage, getRoomData } from "../../../code-blocks/chat.realtime";
-
+import Validator from "../../../component/validation-system/validate-user-login";
 export default function Room({ query }) {
     const [user, updateUser] = useState<any>(false)
     const [roomData, setRoomData] = useState<any>(false)
@@ -31,7 +31,8 @@ export default function Room({ query }) {
 
 
     return (
-        <>
+
+        <Validator>
             <Flex
                 bgGradient="linear(to-l, #7928CA, #FF0080)"
                 alignItems={"center"} justifyContent="center" height={"100vh"}>
@@ -50,8 +51,7 @@ export default function Room({ query }) {
                         onChangeHandler={onChangeHandler} addMessageToRoom={addMessageToRoom} />
                 </Grid>
             </Flex>
-
-        </>
+        </Validator>
     )
 }
 

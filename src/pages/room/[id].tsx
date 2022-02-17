@@ -7,6 +7,7 @@ import Header from "../../../component/chat-component/header";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { addMyMessage, getRoomData } from "../../../code-blocks/chat.realtime";
 import Validator from "../../../component/validation-system/validate-user-login";
+
 export default function Room({ query }) {
     const [user, updateUser] = useState<any>(false)
     const [roomData, setRoomData] = useState<any>(false)
@@ -31,12 +32,18 @@ export default function Room({ query }) {
 
 
     return (
-
         <Validator>
-            <Flex
+            <Flex position={"fixed"} width={"100%"}
                 bgGradient="linear(to-l, #7928CA, #FF0080)"
-                alignItems={"center"} justifyContent="center" height={"100vh"}>
-                <Grid overflow={"hidden"} templateRows={'50px auto 100px'} w={1200} h={800} bg={"black"} borderRadius={10}>
+                alignItems={['start', "center"]}
+                justifyContent="center" height={"100%"} >
+                <Grid
+                    overflow={"hidden"}
+                    templateRows={'50px auto 100px'}
+                    w={1200}
+                    h={['100%', 800]}
+                    bg={"black"}
+                    borderRadius={['0', 10]}>
                     <Header
                         query={query}
                         showShare={showShare}
@@ -51,7 +58,7 @@ export default function Room({ query }) {
                         onChangeHandler={onChangeHandler} addMessageToRoom={addMessageToRoom} />
                 </Grid>
             </Flex>
-        </Validator>
+        </Validator >
     )
 }
 

@@ -9,7 +9,9 @@ const Header = ({ query, showShare, setSetting, setShare, showSetting }) => {
     return (
         <Flex justifyContent={"space-between"} alignItems={"center"} bg={"lightcyan"}>
             <Text padding="1rem" fontSize='2xl' textAlign="center" fontFamily="Dosis" fontWeight="bold" >Momentary</Text>
-            <Text>ID: {query}</Text>
+            <Text
+                display={['none', 'block']}
+            >ID: {query}</Text>
             <Box>
                 <Button onClick={shareOnClickHandler} mx='2' bg={'none'} textTransform={'uppercase'}>
                     <Image width={18} height={18} src="/share.svg" />
@@ -23,4 +25,5 @@ const Header = ({ query, showShare, setSetting, setShare, showSetting }) => {
     )
 }
 
+// New Component that show component ID
 export default Header

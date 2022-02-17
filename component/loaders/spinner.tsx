@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { Spinner, Flex, Text, Box } from '@chakra-ui/react'
+import { Spinner, Flex, Box } from '@chakra-ui/react'
 
 const Loader = ({ target }) => {
     const MotionBox = motion(Flex)
@@ -20,7 +20,6 @@ const Loader = ({ target }) => {
                     width="100%"
                 >
 
-                    <Text mr={5} color={'white'}>fetching & decrypting</Text>
                     <Spinner size="sm" color='white' />
                 </MotionBox>}
             </AnimatePresence>

@@ -52,7 +52,7 @@ export default function Room({ query }) {
                         setShare={setShare} />
                     <Chat
                         roomData={roomData}
-                        userEmail={user.email} />
+                        userEmail={user?.email} />
                     <Footer
                         myNewMessage={myNewMessage}
                         onChangeHandler={onChangeHandler} addMessageToRoom={addMessageToRoom} />

@@ -4,12 +4,10 @@ import { useRouter } from "next/router";
 import { signInWithPopup } from "firebase/auth";
 import { Box, Text, Flex, Button, Grid, } from "@chakra-ui/react"
 import { googleAuth, provider } from "../../firebase.config";
-
-
+import { extractUserFlow } from "../../component/user-flow-system/user-flow";
 const Enterence = () => {
 
     const router = useRouter()
-
     // This Function Handle the Login with Google set set up the token as well as the user data
     const logInHandlerWithGoogle = async () => {
         signInWithPopup(googleAuth, provider)
@@ -17,7 +15,7 @@ const Enterence = () => {
                 const { displayName, email, photoURL } = data.user;
                 var token = jwt.sign({ displayName, email, photoURL }, 'this is my secret key');
                 localStorage.setItem('token', token);
-                router.push('/')
+                extractUserFlow(router, '/')
             }).catch(err => { alert(err) })
     }
 

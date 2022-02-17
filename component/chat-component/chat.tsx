@@ -13,22 +13,6 @@ const Chat = ({ roomData, userEmail }) => {
         }
     }, [])
 
-    const Messages = roomData.chat?.map((value, index) => {
-        return (
-            <Flex p={3} pl={5} alignItems={"center"} color={"white"} key={index}>
-                <Button overflow={"hidden"} borderRadius={"50%"} p={0} textTransform={'uppercase'}>
-                    <Image
-                        loader={() => value.sender.photoURL}
-                        src={value.sender.photoURL}
-                        width="40"
-                        height="40"
-                        alt="user image" />
-                </Button>
-                <Text pl={5}>{value.message}</Text>
-            </Flex>
-        )
-    })
-
     const Messages2 = roomData.chat?.map((value, index) => {
         if (value.sender.email == userEmail) {
             return (

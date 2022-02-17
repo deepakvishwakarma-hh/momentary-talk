@@ -8,15 +8,14 @@ import Footer from "../../../component/chat-component/footer";
 import Header from "../../../component/chat-component/header";
 import { addMyMessage, getRoomData } from "../../../code-blocks/chat.realtime";
 import Validator from "../../../component/validation-system/validate-user-login";
-
+import Setting from "../../../component/chat-component/popups/setting";
+import Share from "../../../component/chat-component/popups/share";
 
 export default function Room({ query }) {
     const [user, updateUser] = useState<any>(false)
     const [roomData, setRoomData] = useState<any>(false)
     const [myNewMessage, setMyNewMessage] = useState<string>('')
 
-    const [showSetting, setSetting] = useState<boolean>(false)
-    const [showShare, setShare] = useState<boolean>(false)
     const onChangeHandler = e => { setMyNewMessage(e.target.value) }
 
     const addMessageToRoom = () => {
@@ -41,6 +40,7 @@ export default function Room({ query }) {
                 justifyContent="center" height={"100%"} >
 
                 <Loader target={!roomData} />
+                <Setting target={!roomData} />
 
                 <Grid
                     overflow={"hidden"}
@@ -50,11 +50,7 @@ export default function Room({ query }) {
                     bg={"black"}
                     borderRadius={['0', 10]}>
                     <Header
-                        query={query}
-                        showShare={showShare}
-                        setSetting={setSetting}
-                        showSetting={showSetting}
-                        setShare={setShare} />
+                        query={query} />
                     <Chat
                         roomData={roomData}
                         userEmail={user?.email} />

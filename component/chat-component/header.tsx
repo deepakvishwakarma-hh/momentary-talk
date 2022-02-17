@@ -1,10 +1,18 @@
 import { Box, Button, Flex, Grid, Input, Text } from "@chakra-ui/react"
+import redux_types from "../../redux/action.type"
+import store from "../../redux/store"
 import Image from "next/image"
 import Head from "next/head"
-const Header = ({ query, showShare, setSetting, setShare, showSetting }) => {
+const Header = ({ query }) => {
 
-    const settingOnClickHandler = () => { setSetting(!showSetting) }
-    const shareOnClickHandler = () => { setShare(!showShare) }
+    const { TOGGLE_SETTING, TOGGLE_SHARE } = redux_types;
+
+    const settingOnClickHandler = () => {
+        store.dispatch({ type: TOGGLE_SETTING, payload: true })
+    }
+    const shareOnClickHandler = () => {
+        store.dispatch({ type: TOGGLE_SHARE, payload: true })
+    }
 
     return (
         <>

@@ -1,12 +1,14 @@
 
 import jwt from "jsonwebtoken"
-import { Flex, Grid } from "@chakra-ui/react"
+import { Flex, Box, Grid } from "@chakra-ui/react"
+import Loader from "../../../component/loaders/spinner";
 import Chat from "../../../component/chat-component/chat";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Footer from "../../../component/chat-component/footer";
 import Header from "../../../component/chat-component/header";
-import { useEffect, useLayoutEffect, useState } from "react";
 import { addMyMessage, getRoomData } from "../../../code-blocks/chat.realtime";
 import Validator from "../../../component/validation-system/validate-user-login";
+
 
 export default function Room({ query }) {
     const [user, updateUser] = useState<any>(false)
@@ -37,6 +39,9 @@ export default function Room({ query }) {
                 bgGradient="linear(to-l, #7928CA, #FF0080)"
                 alignItems={['start', "center"]}
                 justifyContent="center" height={"100%"} >
+
+                <Loader target={!roomData} />
+
                 <Grid
                     overflow={"hidden"}
                     templateRows={'50px auto 100px'}

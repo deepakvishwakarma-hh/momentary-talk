@@ -1,28 +1,28 @@
 
 import jwt from "jsonwebtoken"
+import Image from "next/image"
+import { motion } from 'framer-motion'
 import { Flex, Box, Grid } from "@chakra-ui/react"
 import Loader from "../../../component/loaders/spinner";
 import Chat from "../../../component/chat-component/chat";
-import { useEffect, useLayoutEffect, useState, useMemo } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Footer from "../../../component/chat-component/footer";
 import Header from "../../../component/chat-component/header";
-import Share from "../../../component/chat-component/popups/share";
-import { addMyMessage, getRoomData } from "../../../code-blocks/chat.realtime";
-import Validator from "../../../component/validation-system/validate-user-login";
-import Setting from "../../../component/chat-component/popups/setting";
-
-import { updateUser, updateRoomInfo } from "../../store/features/slices"
 import { useAppDispatch, useAppSelector } from "../../store/hook";
-
+import Share from "../../../component/chat-component/popups/share";
+import Setting from "../../../component/chat-component/popups/setting";
+import { updateUser, updateRoomInfo } from "../../store/features/slices"
+import { addMyMessage, getRoomData } from "../../../code-blocks/chat.realtime";
+import Validator from "../../../component/validation-system/validate-user-login"
+import useWindowDimensions from "../../../code-blocks/useDimention"
 export default function Room({ query }) {
-
+    const { height, width } = useWindowDimensions();
     // For Redux Setup
     const user = useAppSelector(state => state.user)
     const oldChat = useAppSelector(state => state.room.chat)
-    const toggleSetting = useAppSelector(state => state.toggles.setting)
     const dispatch = useAppDispatch()
 
-    // Basic Component State
+    const MotionBall = motion(Box)
 
     // that is only used for trigger loading
     const [roomData, setRoomData] = useState<any>(false)
@@ -35,7 +35,9 @@ export default function Room({ query }) {
 
     const addMessageToRoom = () => {
         const { displayName, email, photoURL } = user;
-        addMyMessage(query, oldChat, { displayName, email, photoURL }, myNewMessage);
+        if (myNewMessage !== '') {
+            addMyMessage(query, oldChat, { displayName, email, photoURL }, myNewMessage);
+        }
         setMyNewMessage('')
     }
 
@@ -58,16 +60,36 @@ export default function Room({ query }) {
         <Validator>
             <Loader target={!roomData} />
 
+            <MotionBall
+                initial={{ x: 0, y: 0 }}
+                animate={{ x: 30, y: 100 }}
+                transition={{ duration: 2 }}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                // display={['block', 'none']}
+                dragConstraints={{
+                    top: 0,
+                    left: 0,
+                    right: width - 70,
+                    bottom: height - 70,
+                }} zIndex={99} top="0" pos="absolute" bg="white" width="70px" height="70px" borderRadius="50%" drag>
+                <Image
+                    src="/balloon-heart.svg"
+                    width="30"
+                    height="30"
+                    alt="none"
+                />
+            </MotionBall>
+
+
+
             <Flex position={"fixed"} width={"100%"}
                 bgGradient="linear(to-l, #7928CA, #FF0080)"
                 alignItems={['start', "center"]}
                 justifyContent="center" height={"100%"} >
-
-
-                {toggleSetting && <Setting id={query} />}
-
+                <Setting id={query} />
                 {/* <Share target={roomData} /> */}
-
                 <Grid
                     overflow={"hidden"}
                     templateRows={'60px auto 100px'}

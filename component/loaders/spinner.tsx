@@ -12,7 +12,7 @@ const Loader = ({ target }) => {
                     exit={{ opacity: 0 }}
                     position="fixed"
                     bg="black"
-                    zIndex={1}
+                    zIndex={999999}
                     display="flex"
                     justifyContent="center"
                     alignItems="center"

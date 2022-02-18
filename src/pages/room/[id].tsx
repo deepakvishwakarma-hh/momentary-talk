@@ -60,14 +60,13 @@ export default function Room({ query }) {
         <Validator>
             <Loader target={!roomData} />
 
-            <MotionBall
+            {/* <MotionBall
                 initial={{ x: 0, y: 0 }}
                 animate={{ x: 30, y: 100 }}
                 transition={{ duration: 2 }}
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
-                // display={['block', 'none']}
                 dragConstraints={{
                     top: 0,
                     left: 0,
@@ -80,7 +79,7 @@ export default function Room({ query }) {
                     height="30"
                     alt="none"
                 />
-            </MotionBall>
+            </MotionBall> */}
 
 
 

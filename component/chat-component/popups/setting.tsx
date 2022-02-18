@@ -1,52 +1,51 @@
 import Image from 'next/image'
 import Admin from './component/admin-box'
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from "framer-motion"
 import { useAppDispatch, useAppSelector } from "../../../src/store/hook";
-import { Flex, Box, Text, CloseButton } from '@chakra-ui/react'
+import { Flex, Box, Input, Button, Text, CloseButton, useClipboard } from '@chakra-ui/react'
 import { toggleSetting, } from "../../../src/store/features/slices"
+import useWindowDimensions from "../../../code-blocks/useDimention"
 
 export default function Setting({ id }) {
+    const { height, width } = useWindowDimensions();
     const dispatch = useAppDispatch()
     const closeHandler = () => { dispatch(toggleSetting(false) as any) }
     const toggle = useAppSelector(state => state.toggles.setting)
     const MotionComp = motion(Box)
+
+
+
+    const [value, setValue] = useState(`https://momentary-talk.vercel.app/room/${id}`)
+    const { hasCopied, onCopy } = useClipboard(value)
+
+    const Memoral = useMemo(onCopy, [value])
+
     return (
         <>
             <AnimatePresence>
                 {toggle && <MotionComp
-                    initial={{ x: -1000 }}
-                    animate={{ x: -0 }}
-                    exit={{ x: 1000 }}
                     transition={{ duration: 1 }}
-                    w={['100%', '100%']}
-                    h={['100%', 'initial']}
+                    w={['100%', '50%']}
+                    h={['initial']}
                     pos={'fixed'}
                     top="0%"
+                    left="0"
                     zIndex={100}
                     bg={['white', "white"]}
                 >
-                    <Flex px={5} py={5} alignItems={"center"} justifyContent={"space-between"}>
-                        <Flex>
+                    <Flex px={5} py={5} alignItems={"center"} justifyContent={"space-between"} overflow={'hidden'}>
 
-                            <Image
-                                src="/settings.svg"
-                                width="30"
-                                height="30"
-                                alt="none" />
-                            <Text letterSpacing={1}
-                                textTransform={'uppercase'}
-                                fontSize={[30, 20]}
-                                p={'.5rem 1rem'}
-                            >Settings</Text>
-                        </Flex>
                         <CloseButton p={2} size='xl' onClick={closeHandler} />
                     </Flex>
                     <Box>
-                        <Text p="1rem">
-                            <Text fontSize={20}
-                                textTransform={"uppercase"}
-                                display={'inline'}> ID </Text>
-                            : {id}</Text>
+                        <Text pl={5}>Copy the link send to the you receiver.</Text>
+                        <Flex p={3} mb={2}>
+                            <Input color="blue" value={value} isReadOnly placeholder='Welcome' />
+                            <Button onClick={onCopy} ml={2}>
+                                {hasCopied ? 'Copied' : 'Copy'}
+                            </Button>
+                        </Flex>
 
                         <Admin />
                     </Box>

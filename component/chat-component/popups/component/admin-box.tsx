@@ -1,9 +1,9 @@
 import Image from 'next/image'
-import { Flex, Box, Text } from '@chakra-ui/react'
+import { Grid, Box, Text } from '@chakra-ui/react'
 import { useAppSelector, } from "../../../../src/store/hook";
 
 const Admin = () => {
-    const admin = useAppSelector(state => state.user)
+    const admin = useAppSelector(state => state.room.admin)
     return (
         <>
             <Text
@@ -12,7 +12,7 @@ const Admin = () => {
                 textTransform={'uppercase'}
                 fontSize={15}
             >Admin</Text>
-            <Flex p={"1rem 1rem 1rem 1rem"}>
+            <Grid templateColumns={"50px auto"} p={"1rem 1rem 1rem 1rem"}>
                 {(admin.photoURL) ? <Image
                     src={admin.photoURL as string}
                     width="40"
@@ -27,7 +27,7 @@ const Admin = () => {
                         opacity={.5}
                         pl={2}>{admin.email}</Text>
                 </Box>
-            </Flex>
+            </Grid>
         </>
     )
 }

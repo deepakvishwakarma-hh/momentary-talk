@@ -19,14 +19,14 @@ const Header = ({ query }) => {
             </Head>
             <Flex
                 bg={['white']}
+
                 justifyContent={"space-between"}
                 alignItems={"center"}
             >
-                <Text padding="1rem 1rem" fontSize='2xl' textAlign="center"
-                    fontWeight="bold" >Momentary</Text>
-                <Text
-                    display={['none', 'block']}
-                >ID: {query}</Text>
+                <Box m={4}>
+                    <Image width={25} height={25} src="/balloon-heart.svg" />
+
+                </Box>
                 <Box>
                     <Button onClick={settingOnClickHandler} mx='2' bg={'none'} textTransform={'uppercase'}>
                         <Image width={20} height={20} src="/settings.svg" />

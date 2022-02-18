@@ -25,7 +25,7 @@ const Index = () => {
 
         const DefaultSchema = {
             admin: { displayName, email, photoURL },
-            chat: [{ sender: { displayName, email, photoURL }, message: 'welcome', cat: +Date.now() },
+            chat: [{ sender: { displayName, email, photoURL }, message: '', cat: +Date.now() },
             ]
         }
         set(ref(database, 'room/' + roomId), DefaultSchema)

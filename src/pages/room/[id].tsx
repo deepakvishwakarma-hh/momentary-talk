@@ -60,29 +60,6 @@ export default function Room({ query }) {
         <Validator>
             <Loader target={!roomData} />
 
-            {/* <MotionBall
-                initial={{ x: 0, y: 0 }}
-                animate={{ x: 30, y: 100 }}
-                transition={{ duration: 2 }}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                dragConstraints={{
-                    top: 0,
-                    left: 0,
-                    right: width - 70,
-                    bottom: height - 70,
-                }} zIndex={99} top="0" pos="absolute" bg="white" width="70px" height="70px" borderRadius="50%" drag>
-                <Image
-                    src="/balloon-heart.svg"
-                    width="30"
-                    height="30"
-                    alt="none"
-                />
-            </MotionBall> */}
-
-
-
             <Flex position={"fixed"} width={"100%"}
                 bgGradient="linear(to-l, #7928CA, #FF0080)"
                 alignItems={['start', "center"]}
@@ -114,3 +91,24 @@ export async function getServerSideProps(context) {
     const { query, res } = context;
     return ({ props: { query: query.id } })
 }
+
+{/* <MotionBall
+                initial={{ x: 0, y: 0 }}
+                animate={{ x: 30, y: 100 }}
+                transition={{ duration: 2 }}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                dragConstraints={{
+                    top: 0,
+                    left: 0,
+                    right: width - 70,
+                    bottom: height - 70,
+                }} zIndex={99} top="0" pos="absolute" bg="white" width="70px" height="70px" borderRadius="50%" drag>
+                <Image
+                    src="/balloon-heart.svg"
+                    width="30"
+                    height="30"
+                    alt="none"
+                />
+            </MotionBall> */}

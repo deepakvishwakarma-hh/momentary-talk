@@ -70,7 +70,7 @@ export default function Room({ query }) {
 
                 <Grid
                     overflow={"hidden"}
-                    templateRows={'50px auto 100px'}
+                    templateRows={'100px auto 100px'}
                     w={1200}
                     h={['100%', 800]}
                     bg={"black"}

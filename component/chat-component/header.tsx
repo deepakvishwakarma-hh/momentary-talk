@@ -17,8 +17,12 @@ const Header = ({ query }) => {
                 <title>Room -{query}</title>
                 <meta name="theme-color" content="#16161D" />
             </Head>
-            <Flex justifyContent={"space-between"} alignItems={"center"} bg={"white"}>
-                <Text padding="1rem" fontSize='2xl' textAlign="center"
+            <Flex
+                bg={['#11111D', 'white']}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+            >
+                <Text padding="1rem 1rem" fontSize='2xl' textAlign="center"
                     fontWeight="bold" >Momentary</Text>
                 <Text
                     display={['none', 'block']}

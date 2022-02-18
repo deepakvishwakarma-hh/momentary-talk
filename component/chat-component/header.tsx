@@ -1,17 +1,14 @@
-import { Box, Button, Flex, Grid, Input, Text } from "@chakra-ui/react"
-import redux_types from "../../redux/action.type"
-import store from "../../redux/store"
-import Image from "next/image"
 import Head from "next/head"
-const Header = ({ query }) => {
+import Image from "next/image"
+import { useAppDispatch, } from "../../src/store/hook";
+import { Box, Button, Flex, Text } from "@chakra-ui/react"
+import { toggleSetting } from "../../src/store/features/slices"
 
-    const { TOGGLE_SETTING, TOGGLE_SHARE } = redux_types;
+const Header = ({ query }) => {
+    const dispatch = useAppDispatch()
 
     const settingOnClickHandler = () => {
-        store.dispatch({ type: TOGGLE_SETTING, payload: true })
-    }
-    const shareOnClickHandler = () => {
-        store.dispatch({ type: TOGGLE_SHARE, payload: true })
+        dispatch(toggleSetting(true) as any)
     }
 
     return (
@@ -21,14 +18,12 @@ const Header = ({ query }) => {
                 <meta name="theme-color" content="#16161D" />
             </Head>
             <Flex justifyContent={"space-between"} alignItems={"center"} bg={"white"}>
-                <Text padding="1rem" fontSize='2xl' textAlign="center" fontFamily="Dosis" fontWeight="bold" >Momentary</Text>
+                <Text padding="1rem" fontSize='2xl' textAlign="center"
+                    fontWeight="bold" >Momentary</Text>
                 <Text
                     display={['none', 'block']}
                 >ID: {query}</Text>
                 <Box>
-                    <Button onClick={shareOnClickHandler} mx='2' bg={'white'} textTransform={'uppercase'}>
-                        <Image width={18} height={18} src="/share.svg" />
-                    </Button>
                     <Button onClick={settingOnClickHandler} mx='2' bg={'none'} textTransform={'uppercase'}>
                         <Image width={20} height={20} src="/settings.svg" />
                     </Button>

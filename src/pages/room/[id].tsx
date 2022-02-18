@@ -3,44 +3,70 @@ import jwt from "jsonwebtoken"
 import { Flex, Box, Grid } from "@chakra-ui/react"
 import Loader from "../../../component/loaders/spinner";
 import Chat from "../../../component/chat-component/chat";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState, useMemo } from "react";
 import Footer from "../../../component/chat-component/footer";
 import Header from "../../../component/chat-component/header";
+import Share from "../../../component/chat-component/popups/share";
 import { addMyMessage, getRoomData } from "../../../code-blocks/chat.realtime";
 import Validator from "../../../component/validation-system/validate-user-login";
 import Setting from "../../../component/chat-component/popups/setting";
-import Share from "../../../component/chat-component/popups/share";
+
+import { updateUser, updateRoomInfo } from "../../store/features/slices"
+import { useAppDispatch, useAppSelector } from "../../store/hook";
 
 export default function Room({ query }) {
-    const [user, updateUser] = useState<any>(false)
+
+    // For Redux Setup
+    const user = useAppSelector(state => state.user)
+    const oldChat = useAppSelector(state => state.room.chat)
+    const toggleSetting = useAppSelector(state => state.toggles.setting)
+    const dispatch = useAppDispatch()
+
+    // Basic Component State
+
+    // that is only used for trigger loading
     const [roomData, setRoomData] = useState<any>(false)
+
     const [myNewMessage, setMyNewMessage] = useState<string>('')
 
+    // Component Handlers
     const onChangeHandler = e => { setMyNewMessage(e.target.value) }
+
 
     const addMessageToRoom = () => {
         const { displayName, email, photoURL } = user;
-        addMyMessage(query, roomData?.chat, { displayName, email, photoURL }, myNewMessage);
+        addMyMessage(query, oldChat, { displayName, email, photoURL }, myNewMessage);
         setMyNewMessage('')
     }
+
+    // Component Effects
+
+    // Here User Data Updates
     useLayoutEffect(() => {
-        updateUser(jwt.decode(localStorage.getItem('token')))
+        const decryptedToken = jwt.decode(localStorage.getItem('token'))
+        dispatch(updateUser(decryptedToken) as any)
     }, [])
-
+    // Here Room Data Updates
     useEffect(() => {
-        getRoomData(query, (data) => { setRoomData(data) })
+        getRoomData(query, (data) => {
+            dispatch(updateRoomInfo(data) as any)
+            setRoomData(data)
+        })
     }, [query]);
-
 
     return (
         <Validator>
+            <Loader target={!roomData} />
+
             <Flex position={"fixed"} width={"100%"}
                 bgGradient="linear(to-l, #7928CA, #FF0080)"
                 alignItems={['start', "center"]}
                 justifyContent="center" height={"100%"} >
 
-                <Loader target={!roomData} />
-                <Setting target={!roomData} />
+
+                {toggleSetting && <Setting id={query} />}
+
+                {/* <Share target={roomData} /> */}
 
                 <Grid
                     overflow={"hidden"}
@@ -52,7 +78,6 @@ export default function Room({ query }) {
                     <Header
                         query={query} />
                     <Chat
-                        roomData={roomData}
                         userEmail={user?.email} />
                     <Footer
                         myNewMessage={myNewMessage}

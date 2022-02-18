@@ -1,18 +1,16 @@
-import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../theme'
+import store from "../store/app"
 import { AppProps } from 'next/app'
+import { Provider } from "react-redux";
+import { ChakraProvider } from '@chakra-ui/react'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;800&display=swap');
-      </style>
+    <Provider store={store}>
       <ChakraProvider resetCSS theme={theme}>
         <Component {...pageProps} />
       </ChakraProvider>
-    </>
-
+    </Provider>
   )
 }
 

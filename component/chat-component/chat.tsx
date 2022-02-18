@@ -1,8 +1,11 @@
-import { Box, Button, Flex, Grid, Input, Text } from "@chakra-ui/react"
 import Image from "next/image"
 import { useRef, useEffect } from "react";
+import { useAppSelector } from "../../src/store/hook"
+import { Box, Button, Flex, Grid, Input, Text } from "@chakra-ui/react"
 
-const Chat = ({ roomData, userEmail }) => {
+const Chat = ({ userEmail }) => {
+    const room = useAppSelector(state => state.room)
+
     const messageEl = useRef(null);
     useEffect(() => {
         if (messageEl) {
@@ -13,18 +16,19 @@ const Chat = ({ roomData, userEmail }) => {
         }
     }, [])
 
-    const Messages2 = roomData.chat?.map((value, index) => {
+    const Messages2 = room.chat.map((value, index) => {
+
         if (value.sender.email == userEmail) {
             return (
                 <Flex borderRadius={3} my={3} p={2} pl={5} justifyContent={"end"} alignItems={"center"} color={"white"} key={index}>
                     <Text bgGradient="linear(to-l, #7928CA, #FF0080)" mr={5} pr={5} p={"1rem"} borderRadius={"2rem 0 2rem 1rem"}>{value.message}</Text>
                     <Button alignSelf={"flex-start"} overflow={"hidden"} borderRadius={"50%"} p={0} textTransform={'uppercase'}>
-                        <Image
-                            loader={() => value.sender.photoURL}
-                            src={value.sender.photoURL}
+                        {(value.sender.photoURL) ? <Image
+                            src={value.sender.photoURL as string}
                             width="40"
                             height="40"
-                            alt="user image" />
+                            alt="user image" /> : null
+                        }
                     </Button>
                 </Flex>
             )
@@ -33,12 +37,12 @@ const Chat = ({ roomData, userEmail }) => {
             return (
                 <Flex borderRadius={3} my={3} p={2} pl={5} alignItems={"center"} color={"white"} key={index}>
                     <Button alignSelf={"flex-start"} overflow={"hidden"} borderRadius={"50%"} p={0} textTransform={'uppercase'}>
-                        <Image
-                            loader={() => value.sender.photoURL}
-                            src={value.sender.photoURL}
+                        {(value.sender.photoURL) ? <Image
+                            src={value.sender.photoURL as string}
                             width="40"
                             height="40"
-                            alt="user image" />
+                            alt="user image" /> : null
+                        }
                     </Button>
                     <Text bgGradient="linear(to-l, #7928CA, #FF0080)" ml={5} pr={5} p={"1rem"} borderRadius={"0rem 2rem 1rem 2rem"}>{value.message}</Text>
 

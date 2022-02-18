@@ -18,7 +18,7 @@ const Header = ({ query }) => {
                 <meta name="theme-color" content="#16161D" />
             </Head>
             <Flex
-                bg={['#11111D', 'white']}
+                bg={['white']}
                 justifyContent={"space-between"}
                 alignItems={"center"}
             >

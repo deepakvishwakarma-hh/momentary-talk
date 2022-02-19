@@ -81,7 +81,7 @@ export default function Room({ query }) {
                         <Setting id={query} removeMyMessages={removeMyMessagesHandler} />
                         <Grid
                             overflow={"hidden"}
-                            templateRows={'60px auto 100px'}
+                            templateRows={'70px auto 100px'}
                             w={1200}
                             h={['100%', 800]}
                             bg={"black"}

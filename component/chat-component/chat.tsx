@@ -2,15 +2,23 @@ import Image from "next/image"
 import { useRef, useEffect } from "react";
 import { useAppSelector } from "../../src/store/hook"
 import { Box, Button, Flex, Grid, Input, Text } from "@chakra-ui/react"
+import {
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
+    PopoverArrow,
+    PopoverCloseButton,
+    PopoverAnchor,
+} from '@chakra-ui/react'
 const Chat = ({ userEmail }) => {
 
 
     const getDateStringServ = timestamp => {
-
         const plus0 = num => `0${num.toString()}`.slice(-2)
-
         const d = new Date(timestamp)
-
         const year = d.getFullYear()
         const monthTmp = d.getMonth() + 1
         const month = plus0(monthTmp)
@@ -19,12 +27,8 @@ const Chat = ({ userEmail }) => {
         const minute = plus0(d.getMinutes())
         const second = plus0(d.getSeconds())
         const rest = timestamp.toString().slice(-5)
-
         return `${year}-${month}-${date} , ${hour}:${minute}:${second}`
     }
-
-
-
 
     const room = useAppSelector(state => state.room)
 
@@ -38,7 +42,7 @@ const Chat = ({ userEmail }) => {
         }
     }, [])
 
-    const Messages2 = room.chat.map((value, index) => {
+    const Messages = room?.chat?.map((value, index) => {
 
         if (value.sender.email == userEmail) {
             return (
@@ -63,20 +67,44 @@ const Chat = ({ userEmail }) => {
                             alt="user image" /> : null
                         }
                     </Button>
+
                 </Flex>
             )
         }
         else {
             return (
                 <Flex borderRadius={3} my={3} p={2} pl={5} alignItems={"center"} color={"white"} key={index}>
-                    <Button alignSelf={"flex-start"} overflow={"hidden"} borderRadius={"50%"} p={0} textTransform={'uppercase'}>
-                        {(value.sender.photoURL) ? <Image
-                            src={value.sender.photoURL as string}
-                            width="40"
-                            height="40"
-                            alt="user image" /> : null
-                        }
-                    </Button>
+
+
+
+                    <Popover>
+                        <PopoverTrigger>
+                            <Button alignSelf={"flex-start"} overflow={"hidden"} borderRadius={"50%"} p={0} textTransform={'uppercase'}>
+                                {(value.sender.photoURL) ? <Image
+                                    src={value.sender.photoURL as string}
+                                    width="40"
+                                    height="40"
+                                    alt="user image" /> : null
+                                }
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <PopoverBody bg="black">
+                                <Flex>
+                                    <Text fontWeight={"bold"}>Name</Text>
+                                    <Text pl={3}>{value.sender.displayName}</Text>
+                                </Flex>
+                                <Flex>
+                                    <Text fontWeight={"bold"}>Email</Text>
+                                    <Text pl={3}>{value.sender.email}</Text>
+                                </Flex>
+                            </PopoverBody>
+                        </PopoverContent>
+                    </Popover>
+
+
                     <Box ml={5} minWidth="150px" maxWidth="500px">
                         <Text fontWeight={"500"} textTransform={'lowercase'}>@{value.sender.displayName}</Text>
                         <Text
@@ -93,7 +121,7 @@ const Chat = ({ userEmail }) => {
         <>
             < Box overflowY={"scroll"} ref={messageEl} >
                 <Box p="1rem">
-                    {Messages2}
+                    {Messages}
                 </Box>
             </Box>
         </>

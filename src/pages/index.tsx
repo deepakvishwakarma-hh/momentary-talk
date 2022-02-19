@@ -24,7 +24,7 @@ const Index = () => {
 
         const DefaultSchema = {
             admin: { displayName, email, photoURL },
-            chat: [{ sender: { displayName, email, photoURL }, message: '', cat: +Date.now() },
+            chat: [{ sender: { displayName, email, photoURL }, message: 'Hey 👋 I'm Administrator of this room. Administrator is responsible for room activities, cat: +Date.now() },
             ]
         }
         set(ref(database, 'room/' + roomId), DefaultSchema)

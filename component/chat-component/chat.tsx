@@ -2,17 +2,6 @@ import Image from "next/image"
 import { useRef, useEffect } from "react";
 import { useAppSelector } from "../../src/store/hook"
 import { Box, Button, Flex, Grid, Input, Text } from "@chakra-ui/react"
-import {
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    PopoverHeader,
-    PopoverBody,
-    PopoverFooter,
-    PopoverArrow,
-    PopoverCloseButton,
-    PopoverAnchor,
-} from '@chakra-ui/react'
 const Chat = ({ userEmail }) => {
 
 
@@ -75,35 +64,14 @@ const Chat = ({ userEmail }) => {
             return (
                 <Flex borderRadius={3} my={3} p={2} pl={5} alignItems={"center"} color={"white"} key={index}>
 
-
-
-                    <Popover>
-                        <PopoverTrigger>
-                            <Button alignSelf={"flex-start"} overflow={"hidden"} borderRadius={"50%"} p={0} textTransform={'uppercase'}>
-                                {(value.sender.photoURL) ? <Image
-                                    src={value.sender.photoURL as string}
-                                    width="40"
-                                    height="40"
-                                    alt="user image" /> : null
-                                }
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent>
-                            <PopoverArrow />
-                            <PopoverCloseButton />
-                            <PopoverBody bg="black">
-                                <Flex>
-                                    <Text fontWeight={"bold"}>Name</Text>
-                                    <Text pl={3}>{value.sender.displayName}</Text>
-                                </Flex>
-                                <Flex>
-                                    <Text fontWeight={"bold"}>Email</Text>
-                                    <Text pl={3}>{value.sender.email}</Text>
-                                </Flex>
-                            </PopoverBody>
-                        </PopoverContent>
-                    </Popover>
-
+                    <Button alignSelf={"flex-start"} overflow={"hidden"} borderRadius={"50%"} p={0} textTransform={'uppercase'}>
+                        {(value.sender.photoURL) ? <Image
+                            src={value.sender.photoURL as string}
+                            width="40"
+                            height="40"
+                            alt="user image" /> : null
+                        }
+                    </Button>
 
                     <Box ml={5} minWidth="150px" maxWidth="500px">
                         <Text fontWeight={"500"} textTransform={'lowercase'}>@{value.sender.displayName}</Text>
@@ -113,7 +81,7 @@ const Chat = ({ userEmail }) => {
                     </Box>
 
 
-                </Flex>
+                </Flex >
             )
         }
     })

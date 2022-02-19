@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 import Image from "next/image"
 import { motion } from 'framer-motion'
 import {
-    Flex, Grid, useToast, Alert, AlertIcon, AlertTitle, AlertDescription, Center
+    Flex, Grid, useToast, Alert, Center, AlertIcon, Text
 } from "@chakra-ui/react"
 import Loader from "../../../component/loaders/spinner";
 import Chat from "../../../component/chat-component/chat";
@@ -93,10 +93,10 @@ export default function Room({ query }) {
                                 onChangeHandler={onChangeHandler} addMessageToRoom={addMessageToRoom} />
                         </Grid>
                     </Flex> : <Center bg="black" pos="fixed" width="100%" h="100%">
-                        <Alert maxWidth={500} status='error'>
-                            <AlertIcon />
-                            <AlertTitle mr={2}>Your Link is expired!</AlertTitle>
-                            <AlertDescription>Please Cheak Yourself</AlertDescription>
+                        <Alert display={'block'} bg={"blackAlpha.900"} color="white" maxWidth={['300px', '500px']} status='error'>
+                            <Text color="red" fontSize={20}>Link Expired</Text>
+                            <Text>This Link is Expired. Create new room or get another link from administator</Text>
+                            <Text>+++</Text>
                         </Alert>
                     </Center>}
             </Validator >

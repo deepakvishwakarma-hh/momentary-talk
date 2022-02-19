@@ -70,7 +70,14 @@ export default function Room({ query }) {
                 <title>Room -{query}</title>
                 <meta name="theme-color" content="#16161D" />
             </Head>
-
+  <style>
+        @media print {
+            html,
+            body {
+                display: none;
+            }
+        }
+    </style>
             <Validator>
                 <Loader target={loader} />
                 {(testRoom) ?

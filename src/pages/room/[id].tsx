@@ -70,10 +70,13 @@ export default function Room({ query }) {
                 <title>Room -{query}</title>
                 <meta name="theme-color" content="#16161D" />
             </Head>
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+            </style>
             <Validator>
                 <Loader target={loader} />
                 {(testRoom) ?
-                    <Flex position={"fixed"} width={"100%"}
+                    <Flex fontFamily={"Questrial"} position={"fixed"} width={"100%"}
                         bgGradient="linear(to-l, #7928CA, #FF0080)"
                         alignItems={['start', "center"]}
                         justifyContent="center" height={"100%"} >
@@ -93,7 +96,7 @@ export default function Room({ query }) {
                                 onChangeHandler={onChangeHandler} addMessageToRoom={addMessageToRoom} />
                         </Grid>
                     </Flex> : <Center bg="black" pos="fixed" width="100%" h="100%">
-                        <Alert display={'block'} bg={"blackAlpha.900"} color="white" maxWidth={['300px', '500px']} status='error'>
+                        <Alert display={'block'} bg={"blackAlpha.900"} color="white" maxWidth={['100%', '500px']} status='error'>
                             <Text color="red" fontSize={20}>Link Expired</Text>
                             <Text>This Link is Expired. Create new room or get another link from administator</Text>
                             <Text>+++</Text>

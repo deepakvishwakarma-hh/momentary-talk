@@ -19,3 +19,15 @@ export async function getRoomData(roomId: string, callback = (data) => { console
     });
 }
 
+
+export async function removeMyMessages(roomId: string,
+    oldChat: any, email, callback = (data) => { console.log(data) }) {
+    const filteradChat = oldChat.filter(data => data.sender.email !== email)
+    const updates = await update(ref(database, 'room/' + roomId.toString()), {
+        chat: [...filteradChat]
+    }).then((data) => {
+        callback(data)
+    })
+    return updates
+}
+

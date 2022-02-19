@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { ref, set } from "firebase/database";
 import database from "../../firebase.config";
 import { Button, Flex } from "@chakra-ui/react"
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import { updateUser, updateRoomInfo } from "../store/features/slices"
 import Validator from "../../component/validation-system/validate-user-login";
@@ -14,9 +14,8 @@ const Index = () => {
     const user = useAppSelector(state => state.user)
     const [roomId, setRoomId] = useState<number>(+new Date);
 
-    useLayoutEffect(() => {
-        const decryptedToken = jwt.decode(localStorage.getItem('token'))
-        dispatch(updateUser(decryptedToken) as any)
+    useEffect(() => {
+        dispatch(updateUser(jwt.decode(localStorage.getItem('token'))) as any)
     }, [])
 
     function createRealtimeRoom() {

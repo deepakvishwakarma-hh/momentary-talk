@@ -6,20 +6,21 @@ const Admin = () => {
     const admin = useAppSelector(state => state.room.admin)
     return (
         <>
-            <Text
-                pl={3}
-                letterSpacing={1}
-                textTransform={'uppercase'}
-                fontSize={15}
-            >Admin</Text>
-            <Grid templateColumns={"50px auto"} p={"1rem 1rem 1rem 1rem"}>
-                {(admin.photoURL) ? <Image
-                    src={admin.photoURL as string}
-                    width="40"
-                    height="40"
-                    alt="user image" /> : null
+
+            <Grid
+                p={1}
+                borderRadius={3}
+                templateColumns={"50px auto"}
+            >
+                {(admin.photoURL) ? <Box overflow={'hidden'} borderRadius={"50%"}>
+                    <Image
+                        width="50"
+                        height="50"
+                        src={admin.photoURL as string}
+                        alt="user image" />
+                </Box> : null
                 }
-                <Box>
+                <Box pl={3}>
                     <Text
                         fontSize={20}
                         pl={2}>@{admin.displayName}</Text>

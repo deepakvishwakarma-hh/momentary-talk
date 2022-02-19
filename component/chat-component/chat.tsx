@@ -23,9 +23,6 @@ const Chat = () => {
 
     const messageEl = useRef(null);
     useEffect(() => {
-        if ("vibrate" in navigator) {
-            navigator.vibrate(1000);
-        }
         if (messageEl) {
             messageEl.current.addEventListener('DOMNodeInserted', event => {
                 const { currentTarget: target } = event;

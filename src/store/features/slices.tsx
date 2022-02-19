@@ -26,21 +26,21 @@ type initialState = {
 
 const initialState: initialState = {
     user: {
-        displayName: '',
-        email: '',
-        photoURL: '',
+        displayName: 'default',
+        email: 'default',
+        photoURL: false,
     },
     room: {
         admin: {
-            displayName: '',
-            email: '',
+            displayName: 'default',
+            email: 'default',
             photoURL: false,
         }, chat: [
             {
                 sender: {
-                    displayName: '',
-                    email: '',
-                    photoURL: '',
+                    displayName: 'default',
+                    email: 'default',
+                    photoURL: false,
                 },
                 message: 'dummy message ',
                 cat: 1313223

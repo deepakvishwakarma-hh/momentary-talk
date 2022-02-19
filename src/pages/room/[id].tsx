@@ -2,7 +2,12 @@
 import jwt from "jsonwebtoken"
 import Image from "next/image"
 import { motion } from 'framer-motion'
-import { Flex, Box, Grid, useToast } from "@chakra-ui/react"
+import {
+    Flex, Box, Grid, useToast, Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription, Center
+} from "@chakra-ui/react"
 import Loader from "../../../component/loaders/spinner";
 import Chat from "../../../component/chat-component/chat";
 import { useEffect, useLayoutEffect, useState } from "react";
@@ -16,7 +21,6 @@ import { addMyMessage, getRoomData, removeMyMessages } from "../../../code-block
 import Validator from "../../../component/validation-system/validate-user-login"
 import useWindowDimensions from "../../../code-blocks/useDimention"
 
-
 export default function Room({ query }) {
 
     const toast = useToast();
@@ -24,9 +28,10 @@ export default function Room({ query }) {
 
     // state related blocks
     const user = useAppSelector(state => state.user);
-    const [roomData, setRoomData] = useState<any>(false);
-    const oldChat = useAppSelector(state => state.room.chat);
+    const [loader, setLoader] = useState<'loading' | 'loaded'>('loading');
+    const oldChat = useAppSelector(state => state?.room?.chat);
     const [myNewMessage, setMyNewMessage] = useState<string>('');
+    const [testRoom, setRoom] = useState(false)
 
     // Handlers 
     const onChangeHandler = e => { setMyNewMessage(e.target.value) }
@@ -59,40 +64,48 @@ export default function Room({ query }) {
     useEffect(() => {
         getRoomData(query, (data) => {
             dispatch(updateRoomInfo(data) as any)
-            setRoomData(data)
+            setLoader('loaded')
+            setRoom(data)
         })
     }, [query]);
 
     return (
         <Validator>
-            <Loader target={!roomData} />
-
-            <Flex position={"fixed"} width={"100%"}
-                bgGradient="linear(to-l, #7928CA, #FF0080)"
-                alignItems={['start', "center"]}
-                justifyContent="center" height={"100%"} >
-                <Setting id={query} removeMyMessages={removeMyMessagesHandler} />
-                <Grid
-                    overflow={"hidden"}
-                    templateRows={'60px auto 100px'}
-                    w={1200}
-                    h={['100%', 800]}
-                    bg={"black"}
-                    borderRadius={['0', 10]}>
-                    <Header
-                        query={query} />
-                    <Chat
-                        userEmail={user?.email} />
-                    <Footer
-                        myNewMessage={myNewMessage}
-                        onChangeHandler={onChangeHandler} addMessageToRoom={addMessageToRoom} />
-                </Grid>
-            </Flex>
+            <Loader target={loader} />
+            {(testRoom) ?
+                <Flex position={"fixed"} width={"100%"}
+                    bgGradient="linear(to-l, #7928CA, #FF0080)"
+                    alignItems={['start', "center"]}
+                    justifyContent="center" height={"100%"} >
+                    <Setting id={query} removeMyMessages={removeMyMessagesHandler} />
+                    <Grid
+                        overflow={"hidden"}
+                        templateRows={'60px auto 100px'}
+                        w={1200}
+                        h={['100%', 800]}
+                        bg={"black"}
+                        borderRadius={['0', 10]}>
+                        <Header
+                            query={query} />
+                        <Chat
+                            userEmail={user?.email} />
+                        <Footer
+                            myNewMessage={myNewMessage}
+                            onChangeHandler={onChangeHandler} addMessageToRoom={addMessageToRoom} />
+                    </Grid>
+                </Flex> : <Center bg="black" pos="fixed" width="100%" h="100%">
+                    <Alert maxWidth={500} status='error'>
+                        <AlertIcon />
+                        <AlertTitle mr={2}>Your Link is expired!</AlertTitle>
+                        <AlertDescription>Please Cheak Yourself</AlertDescription>
+                    </Alert>
+                </Center>
+            }
         </Validator >
     )
 }
 
 export async function getServerSideProps(context) {
-    const { query, res } = context;
+    const { query } = context;
     return ({ props: { query: query.id } })
 }

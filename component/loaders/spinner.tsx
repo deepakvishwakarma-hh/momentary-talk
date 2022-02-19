@@ -6,7 +6,7 @@ const Loader = ({ target }) => {
     return (
         <>
             <AnimatePresence>
-                {target && <MotionBox
+                {(target == 'loading') && <MotionBox
                     initial={{ opacity: 1 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}

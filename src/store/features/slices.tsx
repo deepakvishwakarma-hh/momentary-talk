@@ -13,6 +13,7 @@ type chat = {
 }
 
 type initialState = {
+    currentRoomId: undefined | string
     user: Admin,
     room: {
         admin: Admin,
@@ -25,6 +26,7 @@ type initialState = {
 
 
 const initialState: initialState = {
+    currentRoomId: undefined,
     user: {
         displayName: 'default',
         email: 'default',
@@ -65,16 +67,13 @@ export const counterSlice = createSlice({
         toggleSetting: (state, action) => {
             state.toggles.setting = action.payload
         },
+        updateRoomId: (state, action) => {
+            state.currentRoomId = action.payload
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { updateUser, updateRoomInfo, toggleSetting } = counterSlice.actions
+export const { updateUser, updateRoomInfo, toggleSetting, updateRoomId } = counterSlice.actions
 
 export default counterSlice.reducer
-
-
-// Redux Toolkit allows us to write "mutating" logic in reducers. It
-            // doesn't actually mutate the state because it uses the Immer library,
-            // which detects changes to a "draft state" and produces a brand new
-            // immutab  

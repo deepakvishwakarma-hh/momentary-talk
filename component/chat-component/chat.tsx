@@ -1,9 +1,8 @@
 import Image from "next/image"
 import { useRef, useEffect } from "react";
-import { useAppSelector } from "../../src/store/hook"
-import { Box, Button, Flex, Grid, Input, Text } from "@chakra-ui/react"
-const Chat = ({ userEmail }) => {
-
+import { Box, Button, Flex, Text } from "@chakra-ui/react"
+import { useAppSelector } from "../../src/store/hook";
+const Chat = () => {
 
     const getDateStringServ = timestamp => {
         const plus0 = num => `0${num.toString()}`.slice(-2)
@@ -19,7 +18,7 @@ const Chat = ({ userEmail }) => {
         return `${year}-${month}-${date} , ${hour}:${minute}:${second}`
     }
 
-    const room = useAppSelector(state => state.room)
+    const state = useAppSelector(state => state)
 
     const messageEl = useRef(null);
     useEffect(() => {
@@ -31,13 +30,13 @@ const Chat = ({ userEmail }) => {
         }
     }, [])
 
-    const Messages = room?.chat?.map((value, index) => {
+    const Messages = state.room.chat?.map((value, index) => {
 
-        if (value.sender.email == userEmail) {
+        if (value.sender.email == state.user.email) {
             return (
                 <Flex borderRadius={3} my={3} p={2} pl={5} justifyContent={"end"} alignItems={"center"} color={"white"} key={index}>
                     <Box
-                        mr={5} minWidth="150px" maxWidth="500px"
+                        mr={5} minWidth="200px" maxWidth="500px"
                     >
                         <Text textAlign={"right"}>You</Text>
                         <Text width={'inherit'}
@@ -62,7 +61,7 @@ const Chat = ({ userEmail }) => {
         }
         else {
             return (
-                <Flex borderRadius={3} my={3} p={2} pl={5} alignItems={"center"} color={"white"} key={index}>
+                <Flex borderRadius={3} my={3} p={2} pr={5} alignItems={"center"} color={"white"} key={index}>
 
                     <Button alignSelf={"flex-start"} overflow={"hidden"} borderRadius={"50%"} p={0} textTransform={'uppercase'}>
                         {(value.sender.photoURL) ? <Image
@@ -73,13 +72,12 @@ const Chat = ({ userEmail }) => {
                         }
                     </Button>
 
-                    <Box ml={5} minWidth="150px" maxWidth="500px">
+                    <Box ml={5} minWidth="200px" maxWidth="500px">
                         <Text fontWeight={"500"} textTransform={'lowercase'}>@{value.sender.displayName}</Text>
                         <Text
                             bg="#FF0080"
                             pr={5} p={"1rem"} borderRadius={"0rem 1rem 1rem 1rem"}>{value.message}</Text>
                     </Box>
-
 
                 </Flex >
             )

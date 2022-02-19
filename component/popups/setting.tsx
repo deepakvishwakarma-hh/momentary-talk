@@ -1,30 +1,42 @@
 import Admin from './component/admin-box'
 import { motion, AnimatePresence } from "framer-motion"
-import { toggleSetting, } from "../../../src/store/features/slices"
-import useWindowDimensions from "../../../code-blocks/useDimention"
-import { useAppDispatch, useAppSelector } from "../../../src/store/hook";
-import {
-    Flex, Box, Input, Button, Center, Text, CloseButton, Accordion,
-    AccordionItem,
-    AccordionButton,
-    AccordionPanel,
-    AccordionIcon,
-} from '@chakra-ui/react'
+import { toggleSetting, } from "../../src/store/features/slices"
+import useWindowDimensions from "../../code-blocks/useDimention"
+import { useAppDispatch, useAppSelector } from "../../src/store/hook";
+import { removeMyMessages, deleteRoom } from '../../code-blocks/chat.realtime';
+import { Flex, Box, Input, Button, useToast, Center, Text, CloseButton, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from '@chakra-ui/react'
 
-export default function Setting({ id, removeMyMessages, terminate }) {
+
+export default function Setting() {
     const MotionComp = motion(Box);
+    const toast = useToast();
     const dispatch = useAppDispatch();
     const { width } = useWindowDimensions();
-    const toggle = useAppSelector(state => state.toggles.setting);
     const state = useAppSelector(state => state);
     const authorize = state.user.email == state.room.admin.email;
     const closeHandler = () => { dispatch(toggleSetting(false) as any) };
-    const shareableLink = `https://momentary-talk.vercel.app/room/${id}`;
+    const shareableLink = `https://momentary-talk.vercel.app/room/${state.currentRoomId}`;
     const clickToCopyHandler = () => { navigator.clipboard.writeText(shareableLink) };
+
+    const removeMyMessagesHandler = () => {
+        removeMyMessages(state.currentRoomId, state.room.chat, state.user.email, () => {
+            toast({
+                title: 'Messages deleted',
+                description: "We've deleted your messages for you.",
+                status: 'success',
+                duration: 1000,
+                isClosable: true,
+            })
+        })
+    }
+    const terminate = () => {
+        deleteRoom(state.currentRoomId)
+    }
+
     return (
         <>
             <AnimatePresence>
-                {toggle && <Center
+                {state.toggles.setting && <Center
                     h="100%"
                     w="100%"
                     zIndex={100}
@@ -133,9 +145,9 @@ export default function Setting({ id, removeMyMessages, terminate }) {
                                                 py={2}
                                                 textTransform={"uppercase"}>Protect yourself </Text>
                                             <Box>
-                                                <Text color={'grey'} py={2}>Delete all the data entered in the current ({id}) room.</Text>
+                                                <Text color={'grey'} py={2}>Delete all the data entered in the current ({state.currentRoomId}) room.</Text>
                                                 <Button
-                                                    onClick={removeMyMessages}
+                                                    onClick={removeMyMessagesHandler}
                                                     borderRadius={5}
                                                     width={'100%'}
                                                     colorScheme={'purple'}
@@ -168,10 +180,8 @@ export default function Setting({ id, removeMyMessages, terminate }) {
                                                 >Terminate</Button>
                                             </Box>
                                         </Box>
-
                                     </AccordionPanel>
                                 </AccordionItem>
-
                             </Accordion>
                         </Box>
                     </MotionComp>

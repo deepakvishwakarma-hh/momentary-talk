@@ -1,10 +1,9 @@
-import Head from "next/head"
 import Image from "next/image"
 import { useAppDispatch, } from "../../src/store/hook";
 import { Box, Button, Flex, Text } from "@chakra-ui/react"
 import { toggleSetting } from "../../src/store/features/slices"
 
-const Header = ({ query }) => {
+const Header = () => {
     const dispatch = useAppDispatch()
 
     const settingOnClickHandler = () => {
@@ -13,10 +12,6 @@ const Header = ({ query }) => {
 
     return (
         <>
-            <Head>
-                <title>Room -{query}</title>
-                <meta name="theme-color" content="#16161D" />
-            </Head>
             <Flex
                 bg={['white']}
 

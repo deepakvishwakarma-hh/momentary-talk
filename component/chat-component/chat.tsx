@@ -77,7 +77,7 @@ const Chat = ({ userEmail }) => {
                             alt="user image" /> : null
                         }
                     </Button>
-                    <Box ml={5}>
+                    <Box ml={5} minWidth="150px" maxWidth="500px">
                         <Text fontWeight={"500"} textTransform={'lowercase'}>@{value.sender.displayName}</Text>
                         <Text
                             bg="#FF0080"

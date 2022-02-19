@@ -1,8 +1,9 @@
 import Image from "next/image"
-import { useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Box, Button, Flex, Text } from "@chakra-ui/react"
 import { useAppSelector } from "../../src/store/hook";
 const Chat = () => {
+
 
     const getDateStringServ = timestamp => {
         const plus0 = num => `0${num.toString()}`.slice(-2)
@@ -22,6 +23,9 @@ const Chat = () => {
 
     const messageEl = useRef(null);
     useEffect(() => {
+        if ("vibrate" in navigator) {
+            navigator.vibrate(1000);
+        }
         if (messageEl) {
             messageEl.current.addEventListener('DOMNodeInserted', event => {
                 const { currentTarget: target } = event;

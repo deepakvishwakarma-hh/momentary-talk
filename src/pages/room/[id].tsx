@@ -70,9 +70,7 @@ export default function Room({ query }) {
                 <title>Room -{query}</title>
                 <meta name="theme-color" content="#16161D" />
             </Head>
-            <style>
-                @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
-            </style>
+
             <Validator>
                 <Loader target={loader} />
                 {(testRoom) ?

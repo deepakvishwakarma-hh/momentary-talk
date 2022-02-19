@@ -6,11 +6,17 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
-      <ChakraProvider resetCSS theme={theme}>
-        <Component {...pageProps} />
-      </ChakraProvider>
-    </Provider>
+    <>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+      </style>
+      <Provider store={store}>
+        <ChakraProvider resetCSS theme={theme}>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </Provider>
+    </>
+
   )
 }
 

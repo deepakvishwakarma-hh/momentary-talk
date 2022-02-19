@@ -1,7 +1,7 @@
 import Head from "next/head"
 import jwt from "jsonwebtoken"
 import Image from "next/image"
-import { motion } from 'framer-motion'
+// import { motion } from 'framer-motion'
 import {
     Flex, Grid, useToast, Alert, Center, AlertIcon, Text
 } from "@chakra-ui/react"
@@ -13,7 +13,7 @@ import Header from "../../../component/chat-component/header";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import Setting from "../../../component/chat-component/popups/setting";
 import { updateUser, updateRoomInfo } from "../../store/features/slices"
-import { addMyMessage, getRoomData, removeMyMessages } from "../../../code-blocks/chat.realtime";
+import { addMyMessage, getRoomData, removeMyMessages, deleteRoom } from "../../../code-blocks/chat.realtime";
 import Validator from "../../../component/validation-system/validate-user-login"
 
 export default function Room({ query }) {
@@ -47,6 +47,11 @@ export default function Room({ query }) {
         })
     }
 
+    const terminateRoomHandler = () => {
+        deleteRoom(query)
+        alert('rem')
+    }
+
     // component effects 
 
     // decode and update user
@@ -77,7 +82,10 @@ export default function Room({ query }) {
                         bgGradient="linear(to-l, #7928CA, #FF0080)"
                         alignItems={['start', "center"]}
                         justifyContent="center" height={"100%"} >
-                        <Setting id={query} removeMyMessages={removeMyMessagesHandler} />
+                        <Setting
+                            id={query}
+                            removeMyMessages={removeMyMessagesHandler}
+                            terminate={terminateRoomHandler} />
                         <Grid
                             overflow={"hidden"}
                             templateRows={'70px auto 100px'}

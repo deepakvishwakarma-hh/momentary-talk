@@ -11,11 +11,13 @@ import {
     AccordionIcon,
 } from '@chakra-ui/react'
 
-export default function Setting({ id, removeMyMessages }) {
+export default function Setting({ id, removeMyMessages, terminate }) {
     const MotionComp = motion(Box);
     const dispatch = useAppDispatch();
     const { width } = useWindowDimensions();
     const toggle = useAppSelector(state => state.toggles.setting);
+    const state = useAppSelector(state => state);
+    const authorize = state.user.email == state.room.admin.email;
     const closeHandler = () => { dispatch(toggleSetting(false) as any) };
     const shareableLink = `https://momentary-talk.vercel.app/room/${id}`;
     const clickToCopyHandler = () => { navigator.clipboard.writeText(shareableLink) };
@@ -134,12 +136,36 @@ export default function Setting({ id, removeMyMessages }) {
                                                 <Text color={'grey'} py={2}>Delete all the data entered in the current ({id}) room.</Text>
                                                 <Button
                                                     onClick={removeMyMessages}
-                                                    borderRadius={1}
+                                                    borderRadius={5}
                                                     width={'100%'}
-                                                    colorScheme={'red'}
+                                                    colorScheme={'purple'}
                                                     variant={'outline'}
                                                     textTransform={"capitalize"}
-                                                >Delete my messages </Button>
+                                                    letterSpacing={1}
+                                                >Delete</Button>
+                                            </Box>
+                                        </Box>
+                                        <Box p={3}
+                                            bg={'blackAlpha.300'}
+                                        >
+                                            <Text
+                                                letterSpacing={3}
+                                                fontSize={13}
+                                                color={'white.500'}
+                                                py={2}
+                                                textTransform={"uppercase"}>Terminate Room </Text>
+                                            <Box>
+                                                <Text color={'grey'} py={2}>Room Terminate from fireabse server and Link  gonna be expire. This action is only oprated by Admin</Text>
+                                                <Button
+                                                    disabled={!authorize}
+                                                    onClick={terminate}
+                                                    borderRadius={5}
+                                                    width={'100%'}
+                                                    colorScheme={'purple'}
+                                                    variant={'outline'}
+                                                    textTransform={"capitalize"}
+                                                    letterSpacing={1}
+                                                >Terminate</Button>
                                             </Box>
                                         </Box>
 

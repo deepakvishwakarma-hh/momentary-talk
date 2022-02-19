@@ -12,7 +12,7 @@ const Admin = () => {
                 borderRadius={3}
                 templateColumns={"50px auto"}
             >
-                {(admin.photoURL) ? <Box overflow={'hidden'} borderRadius={"50%"}>
+                {(admin.photoURL) ? <Box overflow={'hidden'} >
                     <Image
                         width="50"
                         height="50"

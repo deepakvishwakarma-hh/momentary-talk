@@ -1,3 +1,6 @@
+
+
+import Head from "next/head";
 import jwt from "jsonwebtoken"
 import { NextRouter, useRouter } from "next/router";
 import { ref, set } from "firebase/database";
@@ -45,6 +48,12 @@ const Index = () => {
     return (
 
         <Validator>
+
+<Head>
+                <title>Momentary</title>
+                <meta name="theme-color" content="#16161D" />
+            </Head>
+
             <Grid position={'fixed'} templateRows={"150px auto"} templateColumns={'100%'} width={'100%'} height={'100%'} bg={'blackAlpha.900'}>
                 <Flex justifyContent={"space-between"} bg="none" alignItems={'center'}>
                     <Flex pl={3}>

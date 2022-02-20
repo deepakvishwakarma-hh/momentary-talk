@@ -1,6 +1,6 @@
 import Head from "next/head"
 import jwt from "jsonwebtoken"
-import { useRouter } from "next/router";
+import { NextRouter, Router, useRouter } from "next/router";
 import { useAppDispatch } from "../../store/hook";
 import Setting from "../../../component/popups/setting";
 import Loader from "../../../component/loaders/spinner";
@@ -14,23 +14,26 @@ import LinkExpireFallback from "../../../component/link-expire/link-expire";
 import Validator from "../../../component/validation-system/validate-user-login"
 import { updateUser, updateRoomInfo, updateRoomId } from "../../store/features/slices"
 
+import type { chat, Admin } from "../../store/features/slices"
+type room = { admin: Admin, chat: chat[] } | null
+
 export default function Room() {
-    const router = useRouter()
-    const query = router.query.id as string;
     const dispatch = useAppDispatch();
+    const router: NextRouter = useRouter()
+    const query: string = router.query.id as string;
+
     // state related blocks
-    const [loader, setLoader] = useState<'loading' | 'loaded'>('loading');
     const [testRoom, setRoom] = useState(false)
+    const [loader, setLoader] = useState<'loading' | 'loaded'>('loading');
 
     useEffect(() => {
-        const decryptedToken = jwt.decode(localStorage.getItem('token'))
+        const decryptedToken = jwt.decode(localStorage.getItem('token')) as Admin
         dispatch(updateUser(decryptedToken) as any)
-
         dispatch(updateRoomId(query))
-        getRoomData(query, (data) => {
+        getRoomData(query, (data: room) => {
             dispatch(updateRoomInfo(data) as any)
             setLoader('loaded')
-            setRoom(data)
+            setRoom(data as any)
         })
     }, [query]);
 

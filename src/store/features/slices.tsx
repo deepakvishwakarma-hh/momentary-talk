@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-type Admin = {
+export type Admin = {
     displayName: string,
     email: string,
     photoURL: string | boolean,
 }
 
-type chat = {
+export type chat = {
     sender: Admin,
     message: string,
     cat: number

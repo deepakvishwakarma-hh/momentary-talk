@@ -1,5 +1,6 @@
 import Head from "next/head"
 import jwt from "jsonwebtoken"
+import { useRouter } from "next/router";
 import { useAppDispatch } from "../../store/hook";
 import Setting from "../../../component/popups/setting";
 import Loader from "../../../component/loaders/spinner";
@@ -13,14 +14,16 @@ import LinkExpireFallback from "../../../component/link-expire/link-expire";
 import Validator from "../../../component/validation-system/validate-user-login"
 import { updateUser, updateRoomInfo, updateRoomId } from "../../store/features/slices"
 
-export default function Room({ query }) {
+
+export default function Room() {
+    const router = useRouter()
+    const query = router.query.id as string;
     const dispatch = useAppDispatch();
     // state related blocks
     const [loader, setLoader] = useState<'loading' | 'loaded'>('loading');
     const [testRoom, setRoom] = useState(false)
 
     useEffect(() => {
-
         const decryptedToken = jwt.decode(localStorage.getItem('token'))
         dispatch(updateUser(decryptedToken) as any)
 
@@ -54,7 +57,7 @@ export default function Room({ query }) {
     )
 }
 
-export async function getServerSideProps(context) {
-    const { query } = context;
-    return ({ props: { query: query.id } })
-}
+// export async function getServerSideProps(context) {
+//     const { query } = context;
+//     return ({ props: { query: query.id } })
+// }

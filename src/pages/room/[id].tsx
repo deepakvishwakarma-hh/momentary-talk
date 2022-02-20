@@ -1,6 +1,6 @@
 import Head from "next/head"
 import jwt from "jsonwebtoken"
-import { NextRouter, Router, useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import { useAppDispatch } from "../../store/hook";
 import Setting from "../../../component/popups/setting";
 import Loader from "../../../component/loaders/spinner";
@@ -22,7 +22,6 @@ export default function Room() {
     const router: NextRouter = useRouter()
     const query: string = router.query.id as string;
 
-    // state related blocks
     const [testRoom, setRoom] = useState(false)
     const [loader, setLoader] = useState<'loading' | 'loaded'>('loading');
 

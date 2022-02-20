@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import { ref, set } from "firebase/database";
 import database from "../../firebase.config";
 import { Button, Flex } from "@chakra-ui/react"
@@ -9,7 +9,7 @@ import { updateUser, updateRoomInfo } from "../store/features/slices"
 import Validator from "../../component/validation-system/validate-user-login";
 
 const Index = () => {
-    const router = useRouter();
+    const router: NextRouter = useRouter();
     const dispatch = useAppDispatch()
     const user = useAppSelector(state => state.user)
     const [roomId, setRoomId] = useState<number>(+new Date);

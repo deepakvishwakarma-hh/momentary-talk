@@ -6,7 +6,6 @@ const Admin = () => {
     const admin = useAppSelector(state => state.room.admin)
     return (
         <>
-
             <Grid
                 p={1}
                 borderRadius={3}

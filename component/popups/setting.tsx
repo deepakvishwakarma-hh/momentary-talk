@@ -13,7 +13,7 @@ export default function Setting() {
     const dispatch = useAppDispatch();
     const { width } = useWindowDimensions();
     const state = useAppSelector(state => state);
-    const authorize = state.user.email == state.room.admin.email;
+    const authorize: boolean = state.user.email == state.room.admin.email;
     const closeHandler = () => { dispatch(toggleSetting(false) as any) };
     const shareableLink = `https://momentary-talk.vercel.app/room/${state.currentRoomId}`;
     const clickToCopyHandler = () => { navigator.clipboard.writeText(shareableLink) };
@@ -29,9 +29,7 @@ export default function Setting() {
             })
         })
     }
-    const terminate = () => {
-        deleteRoom(state.currentRoomId)
-    }
+    const terminate = () => { deleteRoom(state.currentRoomId) }
 
     return (
         <>

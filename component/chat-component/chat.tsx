@@ -1,11 +1,10 @@
 import Image from "next/image"
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { Box, Button, Flex, Text } from "@chakra-ui/react"
 import { useAppSelector } from "../../src/store/hook";
 const Chat = () => {
 
-
-    const getDateStringServ = timestamp => {
+    const getDateStringServ = (timestamp: number) => {
         const plus0 = num => `0${num.toString()}`.slice(-2)
         const d = new Date(timestamp)
         const year = d.getFullYear()

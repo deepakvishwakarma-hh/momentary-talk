@@ -77,8 +77,8 @@ const Chat = () => {
                         <Text
                             bg="#FF0080"
                             pr={5} p={"1rem"} borderRadius={"0rem 1rem 1rem 1rem"}>{value.message}</Text>
-                    </Box>
 <Text p={2} opacity={.5} fontSize={['10px', '15px']} textAlign={"right"}>{getDateStringServ(value.cat)}</Text>
+                    </Box>
                 </Flex >
             )
         }

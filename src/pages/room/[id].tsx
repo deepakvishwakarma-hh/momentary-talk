@@ -8,14 +8,14 @@ import Chat from "../../../component/chat-component/chat";
 import { useEffect, useState } from "react";
 import Footer from "../../../component/chat-component/footer";
 import Header from "../../../component/chat-component/header";
-import { getRoomData } from "../../../code-blocks/chat.realtime";
+import { getRoomData, deleteRoom } from "../../../code-blocks/chat.realtime";
 import { Flex, Grid, Alert, Center, Text } from "@chakra-ui/react"
 import LinkExpireFallback from "../../../component/link-expire/link-expire";
 import Validator from "../../../component/validation-system/validate-user-login"
 import { updateUser, updateRoomInfo, updateRoomId } from "../../store/features/slices"
 
 import type { chat, Admin } from "../../store/features/slices"
-type room = { admin: Admin, chat: chat[] } | null
+type room = { lastlong: number, cat: number, admin: Admin, chat: chat[] } | null
 
 export default function Room() {
     const dispatch = useAppDispatch();
@@ -25,6 +25,24 @@ export default function Room() {
     const [testRoom, setRoom] = useState(false)
     const [loader, setLoader] = useState<'loading' | 'loaded'>('loading');
 
+
+    function msToTime(ms) {
+        let seconds: any = (ms / 1000).toFixed(1);
+        let minutes: any = (ms / (1000 * 60)).toFixed(1);
+        let hours: any = (ms / (1000 * 60 * 60)).toFixed(1);
+        let days: any = (ms / (1000 * 60 * 60 * 24)).toFixed(1);
+        if (seconds < 60) return seconds + " Sec";
+        else if (minutes < 60) return minutes + " Min";
+        else if (hours < 24) return hours + " Hrs";
+        else return days + " Days"
+    }
+
+    const deleteDOC = (state: boolean) => {
+        if (state) {
+            deleteRoom(query)
+        }
+    }
+
     useEffect(() => {
         const decryptedToken = jwt.decode(localStorage.getItem('token')) as Admin
         dispatch(updateUser(decryptedToken) as any)
@@ -32,6 +50,8 @@ export default function Room() {
         getRoomData(query, (data: room) => {
             dispatch(updateRoomInfo(data) as any)
             setLoader('loaded')
+            deleteDOC(data?.lastlong < +Date.now())
+            console.log(msToTime(data?.lastlong - +Date.now()))
             setRoom(data as any)
         })
     }, [query]);

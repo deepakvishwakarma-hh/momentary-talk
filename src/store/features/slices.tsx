@@ -6,6 +6,8 @@ export type Admin = {
     photoURL: string | boolean,
 }
 
+type room = { lastlong: number, cat: number, admin: Admin, chat: chat[] } | null
+
 export type chat = {
     sender: Admin,
     message: string,
@@ -15,10 +17,7 @@ export type chat = {
 type initialState = {
     currentRoomId: undefined | string
     user: Admin,
-    room: {
-        admin: Admin,
-        chat: chat[]
-    },
+    room: room,
     toggles: {
         setting: boolean,
     }
@@ -33,6 +32,8 @@ const initialState: initialState = {
         photoURL: false,
     },
     room: {
+        cat: 0,
+        lastlong: 0,
         admin: {
             displayName: 'default',
             email: 'default',

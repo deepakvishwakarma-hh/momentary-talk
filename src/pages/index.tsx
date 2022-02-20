@@ -71,7 +71,7 @@ const Index = () => {
                         <Text letterSpacing={1} fontSize={[30, 40]} color={"white"}>Customize Your Room</Text>
                         <Text fontSize={15} p={0} color={"white"}>Room customization </Text>
                     </Box>
-                    <Box borderRadius={[0, 0, 10]} p={10} maxWidth={500} bg={'blackAlpha.400'} width={'100%'}>
+                    <Box borderRadius={[0, 0, 10]} p={10} maxWidth={500} width={'100%'}>
                         <Text color="white">Room Automatically terminated. By default 1 Hours</Text>
                         <Box>
                             <Select _focus={{ color: 'black' }}

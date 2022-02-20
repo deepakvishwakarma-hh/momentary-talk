@@ -5,7 +5,7 @@ import { useAppDispatch } from "../../store/hook";
 import Setting from "../../../component/popups/setting";
 import Loader from "../../../component/loaders/spinner";
 import Chat from "../../../component/chat-component/chat";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../../../component/chat-component/footer";
 import Header from "../../../component/chat-component/header";
 import { getRoomData } from "../../../code-blocks/chat.realtime";
@@ -13,7 +13,6 @@ import { Flex, Grid, Alert, Center, Text } from "@chakra-ui/react"
 import LinkExpireFallback from "../../../component/link-expire/link-expire";
 import Validator from "../../../component/validation-system/validate-user-login"
 import { updateUser, updateRoomInfo, updateRoomId } from "../../store/features/slices"
-
 
 export default function Room() {
     const router = useRouter()
@@ -56,8 +55,3 @@ export default function Room() {
         </>
     )
 }
-
-// export async function getServerSideProps(context) {
-//     const { query } = context;
-//     return ({ props: { query: query.id } })
-// }

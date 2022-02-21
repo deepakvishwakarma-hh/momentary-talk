@@ -17,8 +17,7 @@ const Header = () => {
                 bg="#121218"
                 justifyContent={"space-between"}
                 boxSizing={'border-box'}
-                alignItems={"center"}
-            >
+                alignItems={"center"} >
                 <Box m={4}>
                     <Text fontSize={[15, 20]} color="white">{user.displayName}</Text>
                     <Text fontSize={[10, 15]} opacity={.6} color="white">{user.email}</Text>

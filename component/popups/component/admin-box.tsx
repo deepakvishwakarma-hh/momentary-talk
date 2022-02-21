@@ -3,7 +3,7 @@ import { Grid, Box, Text } from '@chakra-ui/react'
 import { useAppSelector, } from "../../../src/store/hook";
 
 const Admin = () => {
-    const admin = useAppSelector(state => state.room.admin)
+    const admin = useAppSelector(state => state?.room?.admin)
     return (
         <>
             <Grid

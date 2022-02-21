@@ -1,15 +1,15 @@
 import Head from "next/head"
 import jwt from "jsonwebtoken"
+import { Flex, Grid, } from "@chakra-ui/react"
+import { useEffect, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
 import { useAppDispatch } from "../../store/hook";
 import Setting from "../../../component/popups/setting";
 import Loader from "../../../component/loaders/spinner";
-import Chat from "../../../component/chat-component/chat";
-import { useEffect, useState } from "react";
-import Footer from "../../../component/chat-component/footer";
-import Header from "../../../component/chat-component/header";
-import { getRoomData, deleteRoom } from "../../../code-blocks/chat.realtime";
-import { Flex, Grid, Alert, Center, Text } from "@chakra-ui/react"
+import Chat from "../../../component/room/chat";
+import Footer from "../../../component/room/footer";
+import Header from "../../../component/room/header";
+import { getRoomData } from "../../../code-blocks/chat.realtime";
 import LinkExpireFallback from "../../../component/link-expire/link-expire";
 import Validator from "../../../component/validation-system/validate-user-login"
 import { updateUser, updateRoomInfo, updateRoomId } from "../../store/features/slices"
@@ -26,23 +26,6 @@ export default function Room() {
     const [loader, setLoader] = useState<'loading' | 'loaded'>('loading');
 
 
-    function msToTime(ms) {
-        let seconds: any = (ms / 1000).toFixed(1);
-        let minutes: any = (ms / (1000 * 60)).toFixed(1);
-        let hours: any = (ms / (1000 * 60 * 60)).toFixed(1);
-        let days: any = (ms / (1000 * 60 * 60 * 24)).toFixed(1);
-        if (seconds < 60) return seconds + " Sec";
-        else if (minutes < 60) return minutes + " Min";
-        else if (hours < 24) return hours + " Hrs";
-        else return days + " Days"
-    }
-
-    const deleteDOC = (state: boolean) => {
-        if (state) {
-            deleteRoom(query)
-        }
-    }
-
     useEffect(() => {
         const decryptedToken = jwt.decode(localStorage.getItem('token')) as Admin
         dispatch(updateUser(decryptedToken) as any)
@@ -50,8 +33,6 @@ export default function Room() {
         getRoomData(query, (data: room) => {
             dispatch(updateRoomInfo(data) as any)
             setLoader('loaded')
-            deleteDOC(data?.lastlong < +Date.now())
-            console.log(msToTime(data?.lastlong - +Date.now()))
             setRoom(data as any)
         })
     }, [query]);
@@ -65,9 +46,23 @@ export default function Room() {
             <Validator>
                 <Loader target={loader} />
                 {(testRoom) ?
-                    <Flex fontFamily={"Questrial"} position={"fixed"} width={"100%"} bgGradient="linear(to-l, #7928CA, #FF0080)" alignItems={['start', "center"]} justifyContent="center" height={"100%"} >
+                    <Flex
+                        width={"100%"}
+                        height={"100%"}
+                        position={"fixed"}
+                        fontFamily={"Questrial"}
+                        userSelect={"none"}
+                        justifyContent="center"
+                        alignItems={['start', "center"]}
+                        bgGradient="linear(to-l, #7928CA, #FF0080)">
                         <Setting />
-                        <Grid overflow={"hidden"} templateRows={'70px auto 100px'} w={1200} h={['100%', 800]} bg={"black"} borderRadius={['0', 10]}>
+                        <Grid
+                            w={1200}
+                            h={['100%', 800]}
+                            overflow={"hidden"}
+                            bg={"black"}
+                            borderRadius={['0', 10]}
+                            templateRows={'70px auto 100px'}>
                             <Header />
                             <Chat />
                             <Footer />

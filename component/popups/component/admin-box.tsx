@@ -10,7 +10,7 @@ const AdminBox = () => {
                 borderRadius={3}
                 templateColumns={"50px auto"}
             >
-                {(admin?.photoURL) ? <Box overflow={'hidden'} >
+                {(admin?.photoURL) ? <Box    >
                     <Image
                         width="50"
                         height="50"
@@ -18,11 +18,14 @@ const AdminBox = () => {
                         alt="user image" />
                 </Box> : null
                 }
-                <Box pl={3}>
+                <Box pl={3} >
                     <Text
-                        fontSize={20}
+                        opacity={.8}
+                        fontSize={18}
+                        letterSpacing={1}
                         pl={2}>@{admin?.displayName}</Text>
                     <Text
+                        fontSize={15}
                         opacity={.5}
                         pl={2}>{admin?.email}</Text>
                 </Box>

@@ -21,10 +21,8 @@ export default function Room() {
     const dispatch = useAppDispatch();
     const router: NextRouter = useRouter()
     const query: string = router.query.id as string;
-
     const [testRoom, setRoom] = useState(false)
     const [loader, setLoader] = useState<'loading' | 'loaded'>('loading');
-
 
     useEffect(() => {
         const decryptedToken = jwt.decode(localStorage.getItem('token')) as Admin

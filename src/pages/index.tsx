@@ -19,19 +19,17 @@ const Index = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector(state => state.user)
     const [roomId, setRoomId] = useState<number>(+new Date);
-    const [duration, setDuration] = useState<number>(1)
+    const [duration, setDuration] = useState<number>(0)
     const [loader, setloader] = useState(false)
 
     useEffect(() => {
         dispatch(updateUser(jwt.decode(localStorage.getItem('token'))) as any)
     }, [])
 
-
-
     function createRealtimeRoom() {
         setloader(true)
         var today = new Date();
-        const lastlong = today.setHours(today.getHours() + duration)
+        const lastlong = (duration == 0) ? today.setMinutes(today.getMinutes() + 10) : today.setHours(today.getHours() + duration)
         const { displayName, email, photoURL } = user;
 
         const DefaultSchema = {
@@ -88,7 +86,7 @@ const Index = () => {
                                 </AccordionButton>
                             </h2>
                             <AccordionPanel pb={4}>
-                                <Text color="whiteAlpha.900">Select to terminate your room automatically</Text>
+                                <Text color="whiteAlpha.900">Select to terminate your room automatically By default 10 minutes.</Text>
                                 <Select _focus={{ color: 'black' }}
                                     my={3} onChange={onChangeHandler} variant='filled' placeholder='Last Long'>
                                     <option value='1'>1 Hours</option>

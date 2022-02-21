@@ -29,7 +29,7 @@ const Index = () => {
     function createRealtimeRoom() {
         setloader(true)
         var today = new Date();
-        const lastlong = (duration == 0) ? today.setMinutes(today.getMinutes() + 10) : today.setHours(today.getHours() + duration)
+        const lastlong = (duration == 0) ? today.setMinutes(today.getMinutes() + 5) : today.setHours(today.getHours() + duration)
         const { displayName, email, photoURL } = user;
 
         const DefaultSchema = {
@@ -86,7 +86,7 @@ const Index = () => {
                                 </AccordionButton>
                             </h2>
                             <AccordionPanel pb={4}>
-                                <Text color="whiteAlpha.900">Select to terminate your room automatically By default 10 minutes.</Text>
+                                <Text color="whiteAlpha.900">Select to terminate your room automatically By default 5 minutes.</Text>
                                 <Select _focus={{ color: 'black' }}
                                     my={3} onChange={onChangeHandler} variant='filled' placeholder='Last Long'>
                                     <option value='1'>1 Hours</option>

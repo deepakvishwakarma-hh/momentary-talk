@@ -1,10 +1,11 @@
+import Image from 'next/image'
 import Admin from './component/admin-box'
 import { useEffect, useState } from 'react'
 import { toggleSetting, } from "../../src/store/features/slices"
 import useWindowDimensions from "../../code-blocks/useDimention"
 import { useAppDispatch, useAppSelector } from "../../src/store/hook";
 import { removeMyMessages, deleteRoom } from '../../code-blocks/chat.realtime';
-import { Flex, Box, Input, Button, useToast, Center, Text, CloseButton, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from '@chakra-ui/react'
+import { Flex, Box, Input, Button, useToast, Center, Text, CloseButton, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Tooltip } from '@chakra-ui/react'
 
 export default function Setting() {
     const toast = useToast();
@@ -68,7 +69,8 @@ export default function Setting() {
                     maxWidth={[`${width}px`, `500px`]}
                     minWidth={[`${width}px`, `500px`]} >
                     <Flex color={"white"}
-                        px={9}
+                        pl={9}
+                        pr={7}
                         py={4}
                         overflow={'hidden'}
                         alignItems={"center"}
@@ -79,22 +81,21 @@ export default function Setting() {
                             fontSize={20}
                             textTransform={"uppercase"}>settings</Text>
                         <CloseButton
-                            p={2}
+                            p={0}
                             size='xl'
                             onClick={closeHandler} />
                     </Flex>
                     <Box p={5}
                         color={'white'}>
-                        <Text color={'tomato'} pl={4}>Terminates in {msToTime(time)}</Text>
                         <Accordion defaultIndex={[0]} >
                             <AccordionItem border={"none"} pl={0}>
                                 <h2>
-                                    <AccordionButton justifyContent="space-between">
+                                    <AccordionButton _focus={{ border: "none" }} justifyContent="space-between">
                                         <Text
                                             letterSpacing={3}
                                             fontSize={15}
                                             color={'purple.500'}
-                                            py={3}
+                                            py={2}
                                             textTransform={"uppercase"}>Invitation Link </Text>
                                         <AccordionIcon />
                                     </AccordionButton>
@@ -129,7 +130,7 @@ export default function Setting() {
 
                             <AccordionItem border={"none"} pl={0}>
                                 <h2>
-                                    <AccordionButton justifyContent="space-between">
+                                    <AccordionButton _focus={{ border: "none" }} justifyContent="space-between">
                                         <Text
                                             letterSpacing={3}
                                             fontSize={15}
@@ -141,11 +142,34 @@ export default function Setting() {
                                 </h2>
                                 <AccordionPanel pb={4}>
                                     <Admin />
+                                    <Box mt={3} p={3}
+                                        bg={'blackAlpha.300'}
+                                    >
+                                        <Text
+                                            letterSpacing={3}
+                                            fontSize={13}
+                                            color={'white.500'}
+                                            py={2}
+                                            textTransform={"uppercase"}>Terminate Room </Text>
+                                        <Box>
+                                            <Text color={'grey'} py={2}>Room Terminate from fireabse server and Link  gonna be expire. This action is only oprated by Admin</Text>
+                                            <Button
+                                                disabled={!authorize}
+                                                onClick={terminate}
+                                                borderRadius={5}
+                                                width={'100%'}
+                                                colorScheme={'purple'}
+                                                variant={'outline'}
+                                                textTransform={"capitalize"}
+                                                letterSpacing={1}
+                                            >Terminate</Button>
+                                        </Box>
+                                    </Box>
                                 </AccordionPanel>
                             </AccordionItem>
                             <AccordionItem border={"none"} pl={0}>
                                 <h2>
-                                    <AccordionButton justifyContent="space-between">
+                                    <AccordionButton _focus={{ border: "none" }} justifyContent="space-between">
                                         <Text
                                             letterSpacing={3}
                                             fontSize={15}
@@ -178,33 +202,19 @@ export default function Setting() {
                                             >Delete</Button>
                                         </Box>
                                     </Box>
-                                    <Box p={3}
-                                        bg={'blackAlpha.300'}
-                                    >
-                                        <Text
-                                            letterSpacing={3}
-                                            fontSize={13}
-                                            color={'white.500'}
-                                            py={2}
-                                            textTransform={"uppercase"}>Terminate Room </Text>
-                                        <Box>
-                                            <Text color={'grey'} py={2}>Room Terminate from fireabse server and Link  gonna be expire. This action is only oprated by Admin</Text>
-                                            <Button
-                                                disabled={!authorize}
-                                                onClick={terminate}
-                                                borderRadius={5}
-                                                width={'100%'}
-                                                colorScheme={'purple'}
-                                                variant={'outline'}
-                                                textTransform={"capitalize"}
-                                                letterSpacing={1}
-                                            >Terminate</Button>
-                                        </Box>
-                                    </Box>
+
                                 </AccordionPanel>
                             </AccordionItem>
                         </Accordion>
                     </Box>
+
+                    <Tooltip label="termination time"  >
+                        <Flex position={['absolute', 'static']} bottom={0} pl={9}>
+                            <Image width={20} height={20} src={"/clock.svg"} />
+                            <Text bg="black" py={5} color={'white'} pl={3}>{msToTime(time)}
+                            </Text>
+                        </Flex>
+                    </Tooltip>
                 </Box>
             </Center>
             }

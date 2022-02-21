@@ -140,7 +140,7 @@ export default function Setting() {
                                         <AccordionIcon />
                                     </AccordionButton>
                                 </h2>
-                                <AccordionPanel pb={4}>
+                                <AccordionPanel p={0}>
                                     <Admin />
                                     <Box mt={3} p={3}
                                         bg={'blackAlpha.300'}

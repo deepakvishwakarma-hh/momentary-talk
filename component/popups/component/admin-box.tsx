@@ -6,7 +6,7 @@ const AdminBox = () => {
     return (
         <>
             <Grid
-                p={1}
+                p={3}
                 borderRadius={3}
                 templateColumns={"50px auto"}
             >

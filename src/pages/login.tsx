@@ -1,23 +1,9 @@
 import Image from "next/image"
-import jwt from "jsonwebtoken"
-import { useRouter, NextRouter } from "next/router";
-import { signInWithPopup } from "firebase/auth";
-import { Box, Text, Flex, Button, Grid, } from "@chakra-ui/react"
-import { googleAuth, provider } from "../../firebase.config";
-import { extractUserFlow } from "../../component/user-flow-system/user-flow";
+import { Box, Text, Flex, Grid, } from "@chakra-ui/react"
+import Authentication from "../../code-blocks/authentication";
+
 const Enterence = () => {
-    const router: NextRouter = useRouter()
-
-    const logInHandlerWithGoogle = async () => {
-        signInWithPopup(googleAuth, provider)
-            .then(data => {
-                const { displayName, email, photoURL } = data.user;
-                var token = jwt.sign({ displayName, email, photoURL }, 'this is my secret key');
-                localStorage.setItem('token', token);
-                extractUserFlow(router, '/')
-            }).catch(err => { alert(err) })
-    }
-
+    const authenticate = Authentication()
     return (
 
         <Flex
@@ -38,14 +24,13 @@ const Enterence = () => {
                 gap={6} >
                 <Box p={1} >
                     <Text padding="1rem" fontSize='3xl' textAlign="center"
-                        // fontFamily="Dosis" 
                         fontWeight="bold" >Momentary-Talk</Text>
                     <Text fontSize='1xl' textAlign="center"  >Chat Securely, We Work upon Google policies</Text>
                 </Box>
                 <Box
                 >
-                    <Grid onClick={logInHandlerWithGoogle} bg="#F3F2FB" my={2} padding=".5rem .5rem .5rem 0" borderRadius={5} gridTemplateColumns='50px auto' templateRows='80%' alignItems={"center"}>
-                        <Image width={25} height={25} src="/google.svg" />
+                    <Grid onClick={authenticate} bg="#F3F2FB" my={2} padding=".5rem .5rem .5rem 0" borderRadius={5} gridTemplateColumns='50px auto' templateRows='80%' alignItems={"center"}>
+                        <Image alt="icon" width={25} height={25} src="/google.svg" />
                         <Text textAlign={"center"} fontSize="1xl" fontWeight="500" >Sign With Google</Text>
                     </Grid>
                 </Box>

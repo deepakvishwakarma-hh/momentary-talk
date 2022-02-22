@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 export default function useWindowDimensions() {
-
     const hasWindow = typeof window !== 'undefined';
 
     function getWindowDimensions() {

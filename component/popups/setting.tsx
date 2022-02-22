@@ -15,7 +15,7 @@ export default function Setting() {
     const [time, setTime] = useState<number>(Date.now());
     const authorize: boolean = state?.user?.email == state?.room?.admin?.email;
     const closeHandler: () => void = () => { dispatch(toggleSetting(false) as any) };
-    const shareableLink = `https://momentary-talk.vercel.app/room/${state.currentRoomId}`;
+    const shareableLink = `https://momentary.vercel.app/room/${state.currentRoomId}`;
     const clickToCopyHandler: () => void = () => { navigator.clipboard.writeText(shareableLink) };
     const terminate: () => void = () => { deleteRoom(state.currentRoomId) }
 

@@ -13,6 +13,7 @@ const Authentication = () => {
         const { displayName, email, photoURL } = data.user;
         const TOKEN = jwt.sign({ displayName, email, photoURL }, "secret_key")
         const local_store = localStorage.setItem('token', TOKEN)
+router.reload()
     }
 
     const autheticateWithGoogle = () => {

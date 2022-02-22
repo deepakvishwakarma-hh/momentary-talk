@@ -9,7 +9,9 @@ export default function LoginAleart() {
         <Flex
             alignItems={"center"}
             justifyContent="center"
-            height="100vh"
+            position={"fixed"}
+            height="100%"
+            width={"100%"}
             bg={"black"}
             flexDirection={"column"}
         >

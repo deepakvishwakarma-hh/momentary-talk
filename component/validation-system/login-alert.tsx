@@ -4,7 +4,6 @@ import { Button, Grid, Flex, Text, Box } from "@chakra-ui/react"
 import Authentication from "../../code-blocks/authentication"
 export default function LoginAleart() {
     const authenticate = Authentication()
-
     return (
         <Flex
             alignItems={"center"}

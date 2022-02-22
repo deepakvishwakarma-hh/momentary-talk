@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import UserNotLogin from './login-alert'
+
 export default function Validator({ children }) {
     const [state, setState] = useState<boolean>(false)
-    useEffect(() => {
+    useLayoutEffect(() => {
         (localStorage.getItem('token')) ? setState(true) : null
     }, [])
     return (
@@ -11,3 +12,4 @@ export default function Validator({ children }) {
         </>
     )
 }
+

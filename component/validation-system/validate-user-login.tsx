@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import UserNotLogin from './user-not-login'
+import UserNotLogin from './login-alert'
 export default function Validator({ children }) {
     const [state, setState] = useState<boolean>(false)
     useEffect(() => {

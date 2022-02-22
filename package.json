@@ -4,8 +4,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "homepage": "next homepage",
-    "lint": "next lint"
+    "homepage": "next homepage"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.5",

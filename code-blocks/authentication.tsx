@@ -1,6 +1,7 @@
+// I AM CUSTOM HOOK GOOGLE AUTH FUNCTIONALITY
 
 import jwt from "jsonwebtoken"
-import { useRouter, NextRouter } from "next/router";
+import { useRouter } from "next/router";
 import { signInWithPopup } from "firebase/auth";
 import { googleAuth, provider } from "../firebase.config";
 import { extract } from "../component/flow-system/flow";
@@ -17,7 +18,7 @@ const Authentication = () => {
     const autheticateWithGoogle = () => {
         signInWithPopup(googleAuth, provider)
             .then(data => { encrpt_store(data) })
-            .then(data => { extract(router as any, '/') })
+            .then(data => { extract(router, '/') })
             .catch(err => { alert(err) })
     }
     return autheticateWithGoogle

@@ -10,9 +10,6 @@ import { useAppDispatch, useAppSelector } from "../store/hook";
 import { updateUser, updateRoomInfo } from "../store/features/slices"
 import Validator from "../../component/validation-system/validate-user-login";
 import Image from "next/image"
-import { callAll } from "@chakra-ui/utils";
-import { callbackify } from "util";
-import { divide } from "lodash";
 
 const Index = () => {
     const router: NextRouter = useRouter();
@@ -75,7 +72,7 @@ const Index = () => {
 
                 <Flex bg={" #7928CA"} flexDirection={['column', 'column', 'column', 'row']} alignItems={"center"} justifyContent={"space-around"} pt={10} borderRadius={"3rem 3rem 0 0"}>
 
-                    <Image width={200} height={200} src={'/shield-lock.svg'} />
+                    <Image width={200} alt="none" height={200} src={'/shield-lock.svg'} />
 
                     <Accordion defaultIndex={[0]} minWidth={['90%', 500]} maxWidth={[200, 500]} >
                         <AccordionItem border={"none"} pl={0}>

@@ -10,7 +10,7 @@ import Chat from "../../../component/room/chat";
 import Footer from "../../../component/room/footer";
 import Header from "../../../component/room/header";
 import { getRoomData } from "../../../code-blocks/chat.realtime";
-import LinkExpireFallback from "../../../component/link-expire/link-expire";
+import LinkExpireFallback from "../../../component/validation-system/link-expire";
 import Validator from "../../../component/validation-system/validate-user-login"
 import { updateUser, updateRoomInfo, updateRoomId } from "../../store/features/slices"
 

@@ -23,6 +23,7 @@ export default function Setting() {
     useEffect(() => {
         const interval: NodeJS.Timeout = setInterval(() => {
             setTime(+Date.now() - state?.room?.lastlong)
+            console.log(+Date.now() - state?.room?.lastlong)
             if (state?.room?.lastlong < +Date.now()) {
                 terminate()
             }

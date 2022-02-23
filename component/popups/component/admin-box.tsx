@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import { Grid, Box, Text } from '@chakra-ui/react'
-import { useAppSelector, } from "../../../src/store/hook";
-const AdminBox = () => {
-    const admin = useAppSelector(state => state?.room?.admin)
+
+const AdminBox = ({ admin }) => {
     return (
         <>
             <Grid

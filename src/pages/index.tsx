@@ -31,6 +31,7 @@ const Index = () => {
 
         const DefaultSchema = {
             lastlong: lastlong,
+            online: [{ displayName, email, photoURL }],
             cat: today,
             admin: { displayName, email, photoURL },
             chat: [{ sender: { displayName, email, photoURL }, message: 'Hey 👋 I am Administrator of this room. Administrator is responsible for room activities', cat: +Date.now() },

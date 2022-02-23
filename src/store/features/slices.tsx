@@ -18,6 +18,7 @@ type initialState = {
     currentRoomId: undefined | string
     user: Admin,
     room: room,
+    online: Admin[],
     toggles: {
         setting: boolean,
     }
@@ -31,6 +32,11 @@ const initialState: initialState = {
         email: 'default',
         photoURL: false,
     },
+    online: [{
+        displayName: 'default',
+        email: 'default',
+        photoURL: false,
+    }],
     room: {
         cat: 0,
         lastlong: 0,
@@ -71,10 +77,13 @@ export const counterSlice = createSlice({
         updateRoomId: (state, action) => {
             state.currentRoomId = action.payload
         },
+        updateOnlineArr: (state, action) => {
+            state.online = action.payload
+        }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { updateUser, updateRoomInfo, toggleSetting, updateRoomId } = counterSlice.actions
+export const { updateUser, updateOnlineArr, updateRoomInfo, toggleSetting, updateRoomId } = counterSlice.actions
 
 export default counterSlice.reducer

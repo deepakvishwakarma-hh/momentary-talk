@@ -18,6 +18,7 @@ export default function Setting() {
     const shareableLink = `https://momentary.vercel.app/room/${state.currentRoomId}`;
     const clickToCopyHandler: () => void = () => { navigator.clipboard.writeText(shareableLink) };
     const terminate: () => void = () => { deleteRoom(state.currentRoomId) }
+    const admin = useAppSelector(state => state?.room?.admin)
 
     useEffect(() => {
         const interval: NodeJS.Timeout = setInterval(() => {
@@ -95,6 +96,39 @@ export default function Setting() {
                                             fontSize={15}
                                             color={'purple.500'}
                                             py={2}
+                                            textTransform={"uppercase"}>Members </Text>
+                                        <AccordionIcon />
+                                    </AccordionButton>
+                                </h2>
+                                <AccordionPanel pb={4}>
+                                    <Text
+                                        letterSpacing={3}
+                                        fontSize={13}
+                                        color={'white.500'}
+                                        py={2}
+                                        textTransform={"uppercase"}>Joined User</Text>
+                                    <Text
+                                        letterSpacing={2}
+                                        fontSize={12}
+                                        color={'cyan'}
+                                        opacity={.7}
+                                        fontWeight={200}
+                                        py={1}>Members can see your messages. It can also be offline.If you have any grievance from anyone then you can exit the app.</Text>
+                                    {state.online.map((value, index) => {
+                                        return (
+                                            <Admin key={index} admin={value} />
+                                        )
+                                    })}
+                                </AccordionPanel>
+                            </AccordionItem>
+                            <AccordionItem border={"none"} pl={0}>
+                                <h2>
+                                    <AccordionButton _focus={{ border: "none" }} justifyContent="space-between">
+                                        <Text
+                                            letterSpacing={3}
+                                            fontSize={15}
+                                            color={'purple.500'}
+                                            py={2}
                                             textTransform={"uppercase"}>Invitation Link </Text>
                                         <AccordionIcon />
                                     </AccordionButton>
@@ -140,7 +174,7 @@ export default function Setting() {
                                     </AccordionButton>
                                 </h2>
                                 <AccordionPanel p={0}>
-                                    <Admin />
+                                    <Admin admin={admin} />
                                     <Box mt={3} p={3}
                                         bg={'blackAlpha.300'}
                                     >
@@ -201,7 +235,6 @@ export default function Setting() {
                                             >Delete</Button>
                                         </Box>
                                     </Box>
-
                                 </AccordionPanel>
                             </AccordionItem>
                         </Accordion>

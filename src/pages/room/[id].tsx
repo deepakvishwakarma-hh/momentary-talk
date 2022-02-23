@@ -1,21 +1,21 @@
 import Head from "next/head"
 import jwt from "jsonwebtoken"
-import { Flex, Grid, } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
-import { NextRouter, useRouter } from "next/router";
+import { Flex, Grid, } from "@chakra-ui/react"
+import Chat from "../../../component/room/chat";
 import { useAppDispatch } from "../../store/hook";
+import Footer from "../../../component/room/footer";
+import { NextRouter, useRouter } from "next/router";
+import Header from "../../../component/room/header";
 import Setting from "../../../component/popups/setting";
 import Loader from "../../../component/loaders/spinner";
-import Chat from "../../../component/room/chat";
-import Footer from "../../../component/room/footer";
-import Header from "../../../component/room/header";
-import { getRoomData } from "../../../code-blocks/chat.realtime";
-import LinkExpireFallback from "../../../component/validation-system/link-expire";
+import { getRoomData, updateOnline } from "../../../code-blocks/chat.realtime";
 import Validator from "../../../component/validation-system/validate-user-login"
-import { updateUser, updateRoomInfo, updateRoomId } from "../../store/features/slices"
+import LinkExpireFallback from "../../../component/validation-system/link-expire";
+import { updateUser, updateRoomInfo, updateRoomId, updateOnlineArr } from "../../store/features/slices"
 
 import type { chat, Admin } from "../../store/features/slices"
-type room = { lastlong: number, cat: number, admin: Admin, chat: chat[] } | null
+type room = { lastlong: number, cat: number, admin: Admin, chat: chat[], online: Admin[] } | null
 
 export default function Room() {
     const dispatch = useAppDispatch();
@@ -29,11 +29,14 @@ export default function Room() {
         dispatch(updateUser(decryptedToken) as any)
         dispatch(updateRoomId(query))
         getRoomData(query, (data: room) => {
-            dispatch(updateRoomInfo(data) as any)
             setLoader('loaded')
             setRoom(data as any)
+            dispatch(updateOnlineArr(data?.online))
+            dispatch(updateRoomInfo(data) as any)
+            updateOnline(query, data?.online, decryptedToken)
         })
     }, [query]);
+
 
     return (
         <>

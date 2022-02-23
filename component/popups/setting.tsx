@@ -88,7 +88,7 @@ export default function Setting() {
                     </Flex>
                     <Box p={5}
                         color={'white'}>
-                        <Accordion defaultIndex={[0]} >
+                        <Accordion >
                             <AccordionItem border={"none"} pl={0}>
                                 <h2>
                                     <AccordionButton _focus={{ border: "none" }} justifyContent="space-between">

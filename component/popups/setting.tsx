@@ -24,7 +24,6 @@ export default function Setting() {
             setTime(+Date.now() - state.room.lastlong)
             if (state?.room?.lastlong < +Date.now()) {
                 terminate()
-                alert('Expired')
             }
         }, 1000);
 
@@ -207,10 +206,9 @@ export default function Setting() {
                             </AccordionItem>
                         </Accordion>
                     </Box>
-
                     <Tooltip label="termination time"  >
                         <Flex position={['absolute', 'static']} bottom={0} pl={9}>
-                            <Image width={20} height={20} src={"/clock.svg"} />
+                            <Image width={20} alt="none" height={20} src={"/clock.svg"} />
                             <Text bg="black" py={5} color={'white'} pl={3}>{msToTime(time)}
                             </Text>
                         </Flex>

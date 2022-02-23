@@ -114,7 +114,7 @@ export default function Setting() {
                                         opacity={.7}
                                         fontWeight={200}
                                         py={1}>Members can see your messages. It can also be offline.If you have any grievance from anyone then you can exit the app.</Text>
-                                    {state.online.map((value, index) => {
+                                    {state?.online?.map((value, index) => {
                                         return (
                                             <Admin key={index} admin={value} />
                                         )

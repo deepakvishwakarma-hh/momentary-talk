@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import database from "../firebase.config";
-import { getDatabase, ref, set, onValue, update, remove } from "firebase/database";
+import { ref, onValue, update, remove } from "firebase/database";
 
 // need to add Fallback when getting error
 
@@ -8,6 +8,21 @@ export async function addMyMessage(roomId: string, oldChat: any, sender: any, me
     const Object = (oldChat) ? { chat: [...oldChat, { sender: sender, message: message, cat: +Date.now() }] } : { chat: [{ sender: sender, message: message, cat: +Date.now() }] }
     const updates = await update(ref(database, 'room/' + roomId.toString()), Object);
     return updates;
+}
+
+
+export async function updateOnline(roomId: string, oldChat: any, user: any,) {
+
+    const trigger = oldChat?.filter((value, index) => value.email == user.email)
+    if (trigger?.length == 0) {
+        const Object = (oldChat)
+            ? { online: [...oldChat, user] }
+            : { online: [user] }
+        const updates = await update(ref(database, 'room/' + roomId), Object);
+        return updates;
+    }
+
+
 }
 
 export async function getRoomData(roomId: string, callback = (data) => { console.log(data) }) {

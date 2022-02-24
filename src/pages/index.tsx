@@ -91,7 +91,7 @@ const Index = () => {
                     alignItems={"center"} justifyContent={"space-around"} pt={10} borderRadius={"3rem 3rem 0 0"}>
 
                     <Flex flexDir={'column'}>
-                        <Text p={[10, 0]} fontFamily={"Fredoka One"} fontSize={['5vh', 50, 50, 70]} color="white">Feel Free & Create <br /> <Text display="inline" color="purple ">Room</Text> chat with <br />  <Image src="/send.svg" width={50} height={50} alt="icons" /> Momentary  </Text>
+                        <Text p={[10, 0]} fontFamily={"Fredoka One"} fontSize={['5vh', 50, 50, 70]} color="white">Feel Free & Create <br /> <Text display="inline" color="black ">Room</Text> chat with <br />  <Image src="/send.svg" width={50} height={50} alt="icons" /> Momentary  </Text>
                         <Text px={[10, 0]} fontSize={[20, 25, 30, 30]} color="white">
                             Your complete privacy in your hand</Text>
                     </Flex>

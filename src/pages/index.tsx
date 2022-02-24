@@ -8,18 +8,10 @@ import { NextRouter, useRouter } from "next/router";
 import { updateUser, } from "../store/features/slices"
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import Validator from "../../component/validation-system/validate-user-login";
-import { Button, Flex, Grid, Select, Text, Tooltip, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from "@chakra-ui/react"
-
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    useDisclosure
-} from '@chakra-ui/react'
+    Button, Flex, Grid, Select, Text, Tooltip, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure
+} from "@chakra-ui/react"
+
 import type * as store from "../../types/store"
 
 const Index = () => {
@@ -95,7 +87,7 @@ const Index = () => {
                         <Text px={[10, 0]} fontSize={[20, 25, 30, 30]} color="white">
                             Your complete privacy in your hand</Text>
                     </Flex>
-                    <Button tabIndex={1} width={200} onClick={onOpen}>Create Room</Button>
+                    <Button letterSpacing={1} fontSize={20} fontFamily={"Fredoka One"} width={['80%', 200]} tabIndex={1} onClick={onOpen}>Start Chat</Button>
 
                     <Modal onClose={onClose} isOpen={isOpen} isCentered     >
                         <ModalOverlay backdropFilter='blur(10px) ' />

@@ -11,9 +11,9 @@ const Authentication = () => {
 
     const encrpt_store = (data: any) => {
         const { displayName, email, photoURL } = data.user;
-        const TOKEN = jwt.sign({ displayName, email, photoURL }, "secret_key")
+        const TOKEN = jwt.sign({ displayName, email, photoURL }, process.env.NEXT_PUBLIC_ENV_VARIABLE_SECRETKEY as any)
         const local_store = localStorage.setItem('token', TOKEN)
-router.reload()
+        router.reload()
     }
 
     const autheticateWithGoogle = () => {

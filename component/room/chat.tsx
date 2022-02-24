@@ -3,26 +3,30 @@ import { motion } from "framer-motion"
 import { useRef, useEffect } from "react";
 import { Box, Button, Flex, Text } from "@chakra-ui/react"
 import { useAppSelector } from "../../src/store/hook";
+
+import type * as store from "../../types/store"
+
+
 const Chat = () => {
 
     const getDateStringServ = (timestamp: number) => {
-        const plus0 = num => `0${num.toString()}`.slice(-2), d = new Date(timestamp), year = d.getFullYear(), monthTmp = d.getMonth() + 1, month = plus0(monthTmp), date = plus0(d.getDate()), hour = plus0(d.getHours()), minute = plus0(d.getMinutes()), second = plus0(d.getSeconds()), rest = timestamp.toString().slice(-5)
+        const plus0 = (num: any) => `0${num.toString()}`.slice(-2), d = new Date(timestamp), year = d.getFullYear(), monthTmp = d.getMonth() + 1, month = plus0(monthTmp), date = plus0(d.getDate()), hour = plus0(d.getHours()), minute = plus0(d.getMinutes()), second = plus0(d.getSeconds()), rest = timestamp.toString().slice(-5)
         return `${year}-${month}-${date} , ${hour}:${minute}:${second}`
     }
 
     const state = useAppSelector(state => state)
     const MotionMessage = motion(Text);
-    const messageEl = useRef(null);
+    const messageEl = useRef<null | any>(null);
     useEffect(() => {
         if (messageEl) {
-            messageEl.current.addEventListener('DOMNodeInserted', event => {
+            messageEl.current.addEventListener('DOMNodeInserted', (event: any) => {
                 const { currentTarget: target } = event;
                 target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
             });
         }
     }, [])
 
-    const Messages = state?.room?.chat?.map((value, index) => {
+    const Messages = state?.room?.chat?.map((value: store.chat, index: number) => {
 
         if (value.sender.email == state.user.email) {
             return (
@@ -39,7 +43,7 @@ const Chat = () => {
                         <MotionMessage
                             pr={5}
                             p={"1rem"}
-                            overFlow="hidden"
+                            overflow="hidden"
                             width={'inherit'}
                             bg="#7928CA"
 

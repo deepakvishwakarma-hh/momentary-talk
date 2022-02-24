@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import Admin from './component/admin-box'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { toggleSetting, } from "../../src/store/features/slices"
+import Online from './component/online'
 import useWindowDimensions from "../../code-blocks/useDimention"
 import { useAppDispatch, useAppSelector } from "../../src/store/hook";
 import { removeMyMessages, deleteRoom } from '../../code-blocks/chat.realtime';
@@ -17,7 +18,9 @@ export default function Setting() {
     const closeHandler: () => void = () => { dispatch(toggleSetting(false) as any) };
     const shareableLink = `https://momentary.vercel.app/room/${state.currentRoomId}`;
     const clickToCopyHandler: () => void = () => { navigator.clipboard.writeText(shareableLink) };
-    const terminate: () => void = () => { deleteRoom(state.currentRoomId) }
+    const terminate: () => void = useCallback(() => {
+        deleteRoom(state.currentRoomId as string)
+    }, [state.currentRoomId])
     const admin = useAppSelector(state => state?.room?.admin)
     const lastlongtime = useAppSelector(state => state?.room?.lastlong)
 
@@ -27,15 +30,16 @@ export default function Setting() {
             setTime(+Date.now() - lastlongtime)
             if (lastlongtime < +Date.now()) {
                 terminate()
+                console.log('hii')
             }
         }, 1000);
 
         return () => {
             clearInterval(interval);
         };
-    }, [lastlongtime]);
+    }, [lastlongtime, terminate]);
 
-    function msToTime(ms) {
+    function msToTime(ms: number) {
         let seconds: any = (ms / 1000).toFixed(1);
         let minutes: any = (ms / (1000 * 60)).toFixed(1);
         let hours: any = (ms / (1000 * 60 * 60)).toFixed(1);
@@ -45,7 +49,7 @@ export default function Setting() {
     }
 
     const removeMyMessagesHandler = () => {
-        removeMyMessages(state.currentRoomId, state.room.chat, state.user.email, () => {
+        removeMyMessages(state.currentRoomId as string, state.room.chat, state.user.email, () => {
             toast({
                 title: 'Messages deleted',
                 description: "We've deleted your messages for you.",
@@ -110,16 +114,17 @@ export default function Setting() {
                                         textTransform={"uppercase"}>Joined User</Text>
                                     <Text
                                         letterSpacing={2}
-                                        fontSize={12}
-                                        color={'cyan'}
-                                        opacity={.7}
+                                        fontSize={15}
+                                        color={'red'}
                                         fontWeight={200}
-                                        py={1}>Members can see your messages. It can also be offline.If you have any grievance from anyone then you can exit the app.</Text>
-                                    {state?.online?.map((value, index) => {
-                                        return (
-                                            <Admin key={index} admin={value} />
-                                        )
-                                    })}
+                                        py={1}>Members can see your messages. It can also be online.</Text>
+                                    <Flex >
+                                        {state?.online?.map((value, index) => {
+                                            return (
+                                                <Online key={index} data={value} />
+                                            )
+                                        })}
+                                    </Flex>
                                 </AccordionPanel>
                             </AccordionItem>
                             <AccordionItem border={"none"} pl={0}>

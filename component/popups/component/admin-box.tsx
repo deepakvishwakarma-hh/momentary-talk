@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import { Grid, Box, Text } from '@chakra-ui/react'
+import { user } from "../../../types/store"
 
-const AdminBox = ({ admin }) => {
+const AdminBox = ({ admin }: { admin: user }) => {
     return (
         <>
             <Grid

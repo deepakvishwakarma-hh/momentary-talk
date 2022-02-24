@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Spinner, Flex, Box } from '@chakra-ui/react'
 
-const Loader = ({ target }) => {
+const Loader = ({ target }: { target: 'loading' | 'loaded' }) => {
     const MotionBox = motion(Flex)
     return (
         <>

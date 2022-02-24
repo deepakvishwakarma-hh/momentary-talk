@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import database from "../firebase.config";
 import { ref, onValue, update, remove } from "firebase/database";
 
+import type * as store from "../types/store"
 // need to add Fallback when getting error
 
 export async function addMyMessage(roomId: string, oldChat: any, sender: any, message: string) {
@@ -13,7 +13,7 @@ export async function addMyMessage(roomId: string, oldChat: any, sender: any, me
 
 export async function updateOnline(roomId: string, oldChat: any, user: any,) {
 
-    const trigger = oldChat?.filter((value, index) => value.email == user.email)
+    const trigger = oldChat?.filter((value: store.user, index: number) => value.email == user.email)
     if (trigger?.length == 0) {
         const Object = (oldChat)
             ? { online: [...oldChat, user] }
@@ -25,7 +25,7 @@ export async function updateOnline(roomId: string, oldChat: any, user: any,) {
 
 }
 
-export async function getRoomData(roomId: string, callback = (data) => { console.log(data) }) {
+export async function getRoomData(roomId: string, callback = (data: any) => { console.log(data) }) {
     const starCountRef = ref(database, 'room/' + roomId);
     onValue(starCountRef, (snapshot) => {
         callback(snapshot.val())
@@ -35,8 +35,8 @@ export async function getRoomData(roomId: string, callback = (data) => { console
 
 
 export async function removeMyMessages(roomId: string,
-    oldChat: any, email, callback = (data) => { console.log(data) }) {
-    const filteradChat = oldChat.filter(data => data.sender.email !== email)
+    oldChat: any, email: string, callback = (data: any) => { console.log(data) }) {
+    const filteradChat = oldChat.filter((data: store.chat) => data.sender.email !== email)
     const updates = await update(ref(database, 'room/' + roomId.toString()), {
         chat: [...filteradChat]
     }).then((data) => {
@@ -47,7 +47,7 @@ export async function removeMyMessages(roomId: string,
 
 export async function deleteRoom(room: string) {
     const removedRoom = await remove(ref(database, 'room/' + room.toString())).then(data => {
-        console.log(data + 'deleted')
+        console.log("deleteRoom is running..")
     })
 }
 

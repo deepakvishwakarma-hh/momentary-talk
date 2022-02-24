@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-import { Button, Grid, Flex, Text, Box } from "@chakra-ui/react"
+import { Grid, Flex, Text, Box } from "@chakra-ui/react"
 import Authentication from "../../code-blocks/authentication"
 export default function LoginAleart() {
     const authenticate = Authentication()

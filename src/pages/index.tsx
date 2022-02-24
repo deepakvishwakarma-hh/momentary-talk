@@ -1,36 +1,42 @@
-
 import Head from "next/head";
 import jwt from "jsonwebtoken"
-import { NextRouter, useRouter } from "next/router";
+import Image from "next/image"
 import { ref, set } from "firebase/database";
 import database from "../../firebase.config";
-import { Box, Button, Flex, Grid, Text, Tooltip, Input, Checkbox, Select, CloseButton, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from "@chakra-ui/react"
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEventHandler } from "react";
+import { NextRouter, useRouter } from "next/router";
+import { updateUser, } from "../store/features/slices"
 import { useAppDispatch, useAppSelector } from "../store/hook";
-import { updateUser, updateRoomInfo } from "../store/features/slices"
 import Validator from "../../component/validation-system/validate-user-login";
-import Image from "next/image"
+import { Button, Flex, Grid, Select, Text, Tooltip, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from "@chakra-ui/react"
+
+import type * as store from "../../types/store"
 
 const Index = () => {
     const router: NextRouter = useRouter();
     const dispatch = useAppDispatch()
-    const user = useAppSelector(state => state.user)
-    const [roomId, setRoomId] = useState<number>(+new Date);
+    const [loader, setloader] = useState<boolean>(false)
     const [duration, setDuration] = useState<number>(0)
-    const [loader, setloader] = useState(false)
+    const [roomId, setRoomId] = useState<number>(+new Date);
+    const user: store.user = useAppSelector(state => state.user)
 
     useEffect(() => {
-        dispatch(updateUser(jwt.decode(localStorage.getItem('token'))) as any)
-    }, [])
+        const user = localStorage.getItem('token')
+        dispatch(updateUser(jwt.decode(user as string)))
+
+    }, [dispatch])
+
+
 
     function createRealtimeRoom() {
         setloader(true)
-        var today = new Date();
+        const today: Date = new Date();
         const lastlong = (duration == 0) ? today.setMinutes(today.getMinutes() + 5) : today.setHours(today.getHours() + duration)
+
         const { displayName, email, photoURL } = user;
 
-        const DefaultSchema = {
-            lastlong: lastlong,
+        const DefaultSchema: store.room = {
+            lastlong,
             online: [{ displayName, email, photoURL }],
             cat: today,
             admin: { displayName, email, photoURL },
@@ -42,14 +48,13 @@ const Index = () => {
             .catch((error) => { console.log(error) })
     }
 
-    const onChangeHandler = (e) => {
+    const onChangeHandler: ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDuration(parseFloat(e.target.value))
     }
 
     return (
 
         <Validator>
-
             <Head>
                 <title>Momentary</title>
                 <meta name="theme-color" content="#16161D" />

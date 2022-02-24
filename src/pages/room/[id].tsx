@@ -14,8 +14,7 @@ import Validator from "../../../component/validation-system/validate-user-login"
 import LinkExpireFallback from "../../../component/validation-system/link-expire";
 import { updateUser, updateRoomInfo, updateRoomId, updateOnlineArr } from "../../store/features/slices"
 
-import type { chat, Admin } from "../../store/features/slices"
-type room = { lastlong: number, cat: number, admin: Admin, chat: chat[], online: Admin[] } | null
+import * as store from "../../../types/store"
 
 export default function Room() {
     const dispatch = useAppDispatch();
@@ -25,18 +24,17 @@ export default function Room() {
     const [loader, setLoader] = useState<'loading' | 'loaded'>('loading');
 
     useEffect(() => {
-        const decryptedToken = jwt.decode(localStorage.getItem('token')) as Admin
+        const decryptedToken = jwt.decode(localStorage.getItem('token') as string) as store.user
         dispatch(updateUser(decryptedToken) as any)
         dispatch(updateRoomId(query))
-        getRoomData(query, (data: room) => {
+        getRoomData(query, (data: store.room) => {
             setLoader('loaded')
             setRoom(data as any)
             dispatch(updateOnlineArr(data?.online))
             dispatch(updateRoomInfo(data) as any)
             updateOnline(query, data?.online, decryptedToken)
         })
-    }, [query]);
-
+    }, [query, dispatch]);
 
     return (
         <>

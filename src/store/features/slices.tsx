@@ -1,41 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
+import * as store from "../../../types/store"
 
-export type Admin = {
-    displayName: string,
-    email: string,
-    photoURL: string | boolean,
-}
-
-type room = { lastlong: number, cat: number, admin: Admin, chat: chat[] } | null
-
-export type chat = {
-    sender: Admin,
-    message: string,
-    cat: number
-}
-
-type initialState = {
-    currentRoomId: undefined | string
-    user: Admin,
-    room: room,
-    online: Admin[],
-    toggles: {
-        setting: boolean,
-    }
-}
-
-
-const initialState: initialState = {
+const initialState: store.initial = {
     currentRoomId: undefined,
     user: {
         displayName: 'default',
         email: 'default',
-        photoURL: false,
+        photoURL: "/dot.svg",
     },
     online: [{
         displayName: 'default',
         email: 'default',
-        photoURL: false,
+        photoURL: "/dot.svg",
     }],
     room: {
         cat: 0,
@@ -43,13 +19,13 @@ const initialState: initialState = {
         admin: {
             displayName: 'default',
             email: 'default',
-            photoURL: false,
+            photoURL: "/dot.svg",
         }, chat: [
             {
                 sender: {
                     displayName: 'default',
                     email: 'default',
-                    photoURL: false,
+                    photoURL: "/dot.svg",
                 },
                 message: 'dummy message ',
                 cat: 1313223

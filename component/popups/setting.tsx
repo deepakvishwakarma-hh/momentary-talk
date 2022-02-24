@@ -112,7 +112,7 @@ export default function Setting() {
                                     <Text
                                         letterSpacing={2}
                                         fontSize={15}
-                                        color={'red'}
+                                        color={'blue.500'}
                                         fontWeight={200}
                                         py={1}>Members can see your messages. It can also be online.</Text>
                                     <Flex >
@@ -237,7 +237,7 @@ export default function Setting() {
                                                 onClick={removeMyMessagesHandler}
                                                 borderRadius={5}
                                                 width={'100%'}
-                                                colorScheme={'purple'}
+                                                colorScheme={'blue'}
                                                 variant={'outline'}
                                                 textTransform={"capitalize"}
                                                 letterSpacing={1}

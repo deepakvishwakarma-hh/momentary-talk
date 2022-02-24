@@ -9,7 +9,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <style>
-        @import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap")
+        @import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap");
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
       </style>
       <Provider store={store}>
         <ChakraProvider resetCSS theme={theme}>

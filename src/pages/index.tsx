@@ -10,6 +10,16 @@ import { useAppDispatch, useAppSelector } from "../store/hook";
 import Validator from "../../component/validation-system/validate-user-login";
 import { Button, Flex, Grid, Select, Text, Tooltip, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from "@chakra-ui/react"
 
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    useDisclosure
+} from '@chakra-ui/react'
 import type * as store from "../../types/store"
 
 const Index = () => {
@@ -19,6 +29,8 @@ const Index = () => {
     const [duration, setDuration] = useState<number>(0)
     const [roomId, setRoomId] = useState<number>(+new Date);
     const user: store.user = useAppSelector(state => state.user)
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     useEffect(() => {
         const user = localStorage.getItem('token')
@@ -62,7 +74,6 @@ const Index = () => {
 
             <Grid position={'fixed'} templateRows={"150px auto"} templateColumns={'100%'} width={'100%'} height={'100%'} bg={'blackAlpha.900'}>
 
-                {/* Header  */}
                 <Flex justifyContent={"space-between"} bg="none" alignItems={'center'}>
                     <Flex pl={3}>
                         <Image src="/send.svg" width={30} height={30} alt="icons" />
@@ -74,24 +85,28 @@ const Index = () => {
                         </Flex>
                     </Tooltip>
                 </Flex>
-                {/* Header  */}
 
-                <Flex bg={" #7928CA"} flexDirection={['column', 'column', 'column', 'row']} alignItems={"center"} justifyContent={"space-around"} pt={10} borderRadius={"3rem 3rem 0 0"}>
+                <Flex bgGradient='linear(to-l, #7928CA, #FF0080)'
+                    flexDirection={['column', 'column', 'column', 'row']}
+                    alignItems={"center"} justifyContent={"space-around"} pt={10} borderRadius={"3rem 3rem 0 0"}>
 
-                    <Image width={200} alt="none" height={200} src={'/shield-lock.svg'} />
+                    <Flex flexDir={'column'}>
+                        <Text p={[10, 0]} fontFamily={"Fredoka One"} fontSize={[50, 50, 50, 70]} color="white">Feel Free & Create <br /> <Text display="inline" color="purple ">Room</Text> chat with <br />  <Image src="/send.svg" width={50} height={50} alt="icons" /> Momentary  </Text>
+                        <Text px={[10, 0]} fontSize={[20, 25, 30, 30]} color="white">
+                            Your complete privacy in your hand</Text>
+                    </Flex>
+                    <Button tabIndex={1} width={200} onClick={onOpen}>Create Room</Button>
 
-                    <Accordion defaultIndex={[0]} minWidth={['90%', 500]} maxWidth={[200, 500]} >
-                        <AccordionItem border={"none"} pl={0}>
-                            <h2>
-                                <AccordionButton bg={'blackAlpha.200'} justifyContent="space-between">
-                                    <Text color="white">Create Room</Text>
-                                    <AccordionIcon />
-                                </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>
-                                <Text color="whiteAlpha.900">Select to terminate your room automatically By default 5 minutes.</Text>
+                    <Modal onClose={onClose} isOpen={isOpen} isCentered     >
+                        <ModalOverlay backdropFilter='blur(10px) ' />
+                        <ModalContent bg={'blackAlpha.800'}>
+                            <ModalHeader color="white">Customization</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody>
+                                <Text color="white">Select to terminate your room automatically By default 5 minutes.</Text>
                                 <Select _focus={{ color: 'black' }}
-                                    my={3} onChange={onChangeHandler} variant='filled' placeholder='Last Long'>
+                                    my={3} onChange={onChangeHandler} variant='filled' placeholder='Last Long - default'>
+                                    <option value='0'>5 min</option>
                                     <option value='1'>1 Hours</option>
                                     <option value='2'>2 Hours</option>
                                     <option value='3'>3 Hours</option>
@@ -100,20 +115,30 @@ const Index = () => {
                                     w={'100%'}
                                     _hover={{ opacity: .8, bg: "none" }}
                                     isLoading={loader}
-                                    loadingText='Creating'
+                                    loadingText='Creating...'
                                     variant='outline'
-                                    color="white"
                                     fontWeight={100}
+                                    color="white"
                                     letterSpacing={2}
                                     onClick={createRealtimeRoom}
                                 >
                                     Create
                                 </Button>
+                            </ModalBody>
+                            <ModalFooter>
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
 
-                            </AccordionPanel>
-                        </AccordionItem>
 
-                    </Accordion>
+
+
+
+
+
+
+
+
 
                 </Flex >
             </Grid>

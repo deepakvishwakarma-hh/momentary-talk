@@ -42,10 +42,7 @@ export default function Setting() {
     function msToTime(ms: number) {
         let seconds: any = (ms / 1000).toFixed(1);
         let minutes: any = (ms / (1000 * 60)).toFixed(1);
-        let hours: any = (ms / (1000 * 60 * 60)).toFixed(1);
-        let days: any = (ms / (1000 * 60 * 60 * 24)).toFixed(1);
-        if (minutes < 60) return minutes + " Min";
-        else return hours + " Hrs";
+        if (true) return minutes + " Min";
     }
 
     const removeMyMessagesHandler = () => {
@@ -162,6 +159,8 @@ export default function Setting() {
                                             variant='outline'
                                             colorScheme='purple'
                                             onClick={clickToCopyHandler}
+                                            _hover={{ opacity: .8 }}
+                                            _focus={{ opacity: .8 }}
                                         > COPY</Button>
                                     </Flex>
                                 </AccordionPanel>
@@ -197,7 +196,9 @@ export default function Setting() {
                                                 onClick={terminate}
                                                 borderRadius={5}
                                                 width={'100%'}
-                                                colorScheme={'purple'}
+                                                _hover={{ opacity: .8 }}
+                                                _focus={{ opacity: .8 }}
+                                                colorScheme={'red'}
                                                 variant={'outline'}
                                                 textTransform={"capitalize"}
                                                 letterSpacing={1}
@@ -231,6 +232,8 @@ export default function Setting() {
                                         <Box>
                                             <Text color={'grey'} py={2}>Delete all the data entered in the current ({state.currentRoomId}) room.</Text>
                                             <Button
+                                                _hover={{ opacity: .8 }}
+                                                _focus={{ opacity: .8 }}
                                                 onClick={removeMyMessagesHandler}
                                                 borderRadius={5}
                                                 width={'100%'}

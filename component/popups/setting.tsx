@@ -19,12 +19,13 @@ export default function Setting() {
     const clickToCopyHandler: () => void = () => { navigator.clipboard.writeText(shareableLink) };
     const terminate: () => void = () => { deleteRoom(state.currentRoomId) }
     const admin = useAppSelector(state => state?.room?.admin)
+    const lastlongtime = useAppSelector(state => state?.room?.lastlong)
+
 
     useEffect(() => {
         const interval: NodeJS.Timeout = setInterval(() => {
-            setTime(+Date.now() - state?.room?.lastlong)
-            console.log(+Date.now() - state?.room?.lastlong)
-            if (state?.room?.lastlong < +Date.now()) {
+            setTime(+Date.now() - lastlongtime)
+            if (lastlongtime < +Date.now()) {
                 terminate()
             }
         }, 1000);
@@ -32,7 +33,7 @@ export default function Setting() {
         return () => {
             clearInterval(interval);
         };
-    }, []);
+    }, [lastlongtime]);
 
     function msToTime(ms) {
         let seconds: any = (ms / 1000).toFixed(1);
@@ -40,8 +41,7 @@ export default function Setting() {
         let hours: any = (ms / (1000 * 60 * 60)).toFixed(1);
         let days: any = (ms / (1000 * 60 * 60 * 24)).toFixed(1);
         if (minutes < 60) return minutes + " Min";
-        else if (hours < 24) return hours + " Hrs";
-        else return days + " Days"
+        else return hours + " Hrs";
     }
 
     const removeMyMessagesHandler = () => {

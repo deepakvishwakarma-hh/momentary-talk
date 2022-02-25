@@ -62,14 +62,15 @@ const Index = () => {
             <Head>
                 <title>Momentary</title>
                 <meta name="theme-color" content="#16161D" />
+                <link rel="shortcut icon" href="/transparent.png" />
             </Head>
 
             <Grid position={'fixed'} templateRows={"150px auto"} templateColumns={'100%'} width={'100%'} height={'100%'} bg={'blackAlpha.900'}>
 
                 <Flex justifyContent={"space-between"} bg="none" alignItems={'center'}>
-                    <Flex pl={3}>
-                        <Image src="/send.svg" width={30} height={30} alt="icons" />
-                        <Text color="white" px={3} fontSize="25">Momentary</Text>
+                    <Flex pl={3} alignItems={'center'}>
+                        <Image src="/transparent.png" width={40} height={40} alt="icons" />
+                        <Text color="white" px={3} fontSize="20">Momentary</Text>
                     </Flex>
                     <Tooltip label="Logged in with Google security">
                         <Flex pr={3}>

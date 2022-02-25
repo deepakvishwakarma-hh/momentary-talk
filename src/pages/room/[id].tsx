@@ -39,8 +39,9 @@ export default function Room() {
     return (
         <>
             <Head>
-                <title>Room -{query}</title>
+                <title>Room - {query}</title>
                 <meta name="theme-color" content="#16161D" />
+                <link rel="shortcut icon" href="/transparent.png" />
             </Head>
             <Validator>
                 <Loader target={loader} />

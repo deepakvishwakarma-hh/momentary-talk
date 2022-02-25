@@ -13,7 +13,7 @@ export async function addMyMessage(roomId: string, oldChat: any, sender: any, me
 
 export async function updateOnline(roomId: string, oldChat: any, user: any,) {
 
-    const trigger = oldChat?.filter((value: store.user, index: number) => value.email == user.email)
+    const trigger = oldChat?.filter((value: store.user, index: number) => value?.email == user?.email)
     if (trigger?.length == 0) {
         const Object = (oldChat)
             ? { online: [...oldChat, user] }

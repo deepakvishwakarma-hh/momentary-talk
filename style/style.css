@@ -1,0 +1,4 @@
+body {
+    overscroll-behavior-y: contain;
+    background-color: black;
+}

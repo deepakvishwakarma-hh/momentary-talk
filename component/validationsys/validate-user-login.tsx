@@ -1,5 +1,4 @@
-import { JSXElementConstructor } from 'react'
-import { ReactElement, useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import UserNotLogin from './login-alert'
 
 export default function Validator({ children }: {

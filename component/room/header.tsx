@@ -1,7 +1,8 @@
 import Image from "next/image"
 import { useAppDispatch, useAppSelector } from "../../src/store/hook";
-import { Box, Button, Flex, Text } from "@chakra-ui/react"
+import { Box, Button, Flex } from "@chakra-ui/react"
 import { toggleSetting } from "../../src/store/features/slices"
+import Router from "next/router";
 const Header = () => {
     const dispatch = useAppDispatch();
     const user = useAppSelector(state => state.user)
@@ -9,6 +10,10 @@ const Header = () => {
 
     const settingOnClickHandler = () => {
         dispatch(toggleSetting(true) as any)
+    }
+
+    const homeOnClickHandler = () => {
+        Router.push("/")
     }
 
     return (
@@ -24,19 +29,19 @@ const Header = () => {
                             return (
                                 <Box border={'2px black solid'} ml={(index > 0) ? -5 : 1} width={"40px"} height={"40px"} borderRadius={'50%'} overflow={'hidden'} key={index}>
                                     <Image width={"40px"} alt="none" height={"40px"} src={value.photoURL as string} />
-                                </Box>
-                            )
+                                </Box>)
                         })}
                     </Flex>
 
-
-
                 </Box>
                 <Box>
+
+                    <Button onClick={homeOnClickHandler} mx='2' bg={'none'} textTransform={'uppercase'}>
+                        <Image width={20} alt="none" height={20} src="/home.svg" />
+                    </Button>
                     <Button onClick={settingOnClickHandler} mx='2' bg={'none'} textTransform={'uppercase'}>
                         <Image width={20} alt="none" height={20} src="/settings.svg" />
                     </Button>
-
                 </Box>
             </Flex >
         </>

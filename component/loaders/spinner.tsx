@@ -1,7 +1,9 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Spinner, Flex, Box } from '@chakra-ui/react'
 
-const Loader = ({ target }: { target: 'loading' | 'loaded' }) => {
+type Props = { target: 'loading' | 'loaded' }
+
+const Loader = ({ target }: Props) => {
     const MotionBox = motion(Flex)
     return (
         <>
@@ -19,7 +21,6 @@ const Loader = ({ target }: { target: 'loading' | 'loaded' }) => {
                     height="100%"
                     width="100%"
                 >
-
                     <Spinner size="sm" color='white' />
                 </MotionBox>}
             </AnimatePresence>

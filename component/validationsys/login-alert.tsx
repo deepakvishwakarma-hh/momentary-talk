@@ -1,7 +1,7 @@
 import Image from "next/image"
 
 import { Grid, Flex, Text, Box } from "@chakra-ui/react"
-import Authentication from "../../code-blocks/authentication"
+import Authentication from "../../custom-hooks/authentication"
 export default function LoginAleart() {
     const authenticate = Authentication()
     return (
@@ -16,10 +16,10 @@ export default function LoginAleart() {
         >
             <Box p={'0rem'}
                 borderRadius={10}
+                maxW={400}
                 py={10}
                 px={[10, 20]}
                 bg={'blackAlpha.500'}
-            // border={['none', '1px white solid']}
             >
                 <Text color={"white"} letterSpacing={2} textTransform={"uppercase"} my={4} fontSize={10} fontWeight={'500'}>+ firebase auth provider </Text>
 
@@ -28,7 +28,7 @@ export default function LoginAleart() {
                     <Image alt="icon" width={25} height={25} src="/google.svg" />
                     <Text opacity={.8} fontFamily={"heading"} textAlign={'center'} letterSpacing={1} fontWeight={800}>Connect with Google</Text>
                 </Grid>
-                <Text color={"white"} letterSpacing={2} textTransform={"lowercase"} my={4} fontSize={10} fontWeight={'500'}>! you need to authenticate your identity </Text>
+                <Text color={"white"} letterSpacing={2} textTransform={"lowercase"} my={4} fontSize={10} fontWeight={'500'}>Sorry for intruption visitor. momentary need to Google authorisation to continue</Text>
 
             </Box>
         </Flex>

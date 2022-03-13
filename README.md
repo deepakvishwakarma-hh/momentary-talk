@@ -4,12 +4,22 @@ You can start chatting by configuring your room in the app.
 
 >[Click to visit Momentary](https://momentary.vercel.app/ "click to visit momentary")
 
+
+**Project Detail**
++ Created With Nextjs Typescript
++ Deployed on vercel
++ Firebase for Realtime Database
++ Chakra-UI for styling
++ Redux, React-Redux for state management
++ FramerMotion for transitions
++ JWT (Json Web Token) for Authentication
+
 ------------
 
-####How its work? 🚀
+#### How its work? 🚀
  Momentary uses **Google Firebase** for data storage, **Authentication** and it is fully open-source.
 
-#####🔐 About user security?
+##### 🔐 About user security?
  * **RAT** : When the user creates a room, he has an option Rat (Room Auto Termination). **RAT** termianate room after the TT (termination time).
  
  * **SRT** : (Single room at a time).It alerts the user by anecdotally of the old room's presence. This old room alerts you of data leakage.
@@ -18,7 +28,6 @@ You can start chatting by configuring your room in the app.
  
  * **Administrator control** :  The administrator can also terminate the room whenever they wants and also the block.
  
- ** upcoming ** -> Key Sharing , Block User Access more.
  
 ##  Documentation v1.0.0
 
@@ -52,21 +61,21 @@ Room invitation link is automatic copied on your clipboard.
 
 > popup looks like -
 
->*** Member section**
+>***Member section**
 In the member section, you can see the basic information of the member.
 Also, the member can also block the member except the admin. visit and explore.
 
->*** Invitation link section**
+>***Invitation link section**
 You can view and copy the invitation link here.
 
->*** Administrator section**
+>***Administrator section**
 This section will show you who is the admin,
 And if you are admin then app can also terminate room from here
 
->** * Action control** 
+>***Action control** 
 From this section you can remove the message written by your actions at any time.
 
->** * Termination time** 
+>***Termination time** 
 On the side of the clocks you will see the time, this is the counter of the termination time. The room will automatically terminate when it is zero.
 
 ### + Alearts 

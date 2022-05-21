@@ -1,6 +1,7 @@
 import Head from "next/head"
 import jwt from "jsonwebtoken"
 import { useEffect, useState } from "react";
+import * as store from "../../../types/store"
 import { Flex, Grid, } from "@chakra-ui/react"
 import Chat from "../../../component/room/chat";
 import { useAppDispatch } from "../../store/hook";
@@ -9,12 +10,10 @@ import { NextRouter, useRouter } from "next/router";
 import Header from "../../../component/room/header";
 import Setting from "../../../component/popups/setting";
 import Loader from "../../../component/loaders/spinner";
+import useConfigRoom from "../../../custom-hooks/useConfigRoom";
 import { updateUser, updateRoomId } from "../../store/features/slices"
 import Validator from "../../../component/validationsys/validate-user-login"
 import LinkExpireFallback from "../../../component/validationsys/link-expire";
-
-import * as store from "../../../types/store"
-import useConfigRoom from "../../../custom-hooks/useConfigRoom";
 
 export default function Room() {
 

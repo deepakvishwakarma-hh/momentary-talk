@@ -21,7 +21,7 @@ export default function LoginAleart() {
                 bg={'blackAlpha.500'}>
                 <Text color={"white"} letterSpacing={2} textTransform={"uppercase"} my={4} fontSize={10} fontWeight={'500'}>+ firebase auth provider </Text>
 
-                <Text color={"red"} fontSize={['25', '3xl']} fontWeight={'500'}  >Login not found </Text>
+                <Text color={"white"} fontSize={['25', '3xl']} fontWeight={'500'}  >Login not found </Text>
                 <Grid onClick={authenticate} bg="#F3F2FB" my={3} padding=".7rem 1rem .5rem .3rem" borderRadius={5} gridTemplateColumns='50px auto' templateRows='80%' alignItems={"center"}>
                     <Image alt="icon" width={25} height={25} src="/google.svg" />
                     <Text opacity={.8} fontFamily={"heading"} textAlign={'center'} letterSpacing={1} fontWeight={800}>Connect with Google</Text>

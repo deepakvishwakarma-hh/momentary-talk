@@ -3,20 +3,20 @@ import jwt from "jsonwebtoken";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, ChangeEventHandler } from "react";
-import { useAppDispatch, useAppSelector } from "../store/hook";
 import useConfigRoom from "../../custom-hooks/useConfigRoom";
+import { useAppDispatch, useAppSelector } from "../store/hook";
+import RoomAleart from "../../component/validationsys/room-aleart";
 import Validator from "../../component/validationsys/validate-user-login";
 import { updateUser, update_ATT, update_roomConstruction, updateAbility } from "../store/features/slices";
 import { Button, Flex, Grid, Select, Text, Tooltip, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure } from "@chakra-ui/react";
 
-import RoomAleart from "../../component/validationsys/room-aleart";
 const Index = () => {
     const router = useRouter();
     const dispatch = useAppDispatch();
     const configRoom = useConfigRoom();
-    const { isOpen, onOpen, onClose } = useDisclosure();
     const createRoom = () => { configRoom.create() }
     const user = useAppSelector(state => state?.user);
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const loader = useAppSelector(state => state?._custom._roomConstruction);
 
     // input : select handler

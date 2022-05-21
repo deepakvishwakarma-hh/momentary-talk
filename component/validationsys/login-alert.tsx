@@ -26,7 +26,7 @@ export default function LoginAleart() {
                     <Image alt="icon" width={25} height={25} src="/google.svg" />
                     <Text opacity={.8} fontFamily={"heading"} textAlign={'center'} letterSpacing={1} fontWeight={800}>Connect with Google</Text>
                 </Grid>
-                {/* <Text color={"white"} letterSpacing={2} textTransform={"lowercase"} my={4} fontSize={10} fontWeight={'500'}>Please Authenticate with Google.</Text> */}
+
 
             </Box>
         </Flex>

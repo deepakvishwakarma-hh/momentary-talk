@@ -97,8 +97,7 @@ const Index = () => {
                                 border={"2px rgba(255, 255, 255, 0.116) solid"}
                                 borderRadius={50}
                                 py={1}
-                                px={3}
-                            >
+                                px={3}>
                                 <Image
                                     src="/google.svg"
                                     width={30}
